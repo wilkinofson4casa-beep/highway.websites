@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HWY WEBS — Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="preconnect" href="https://fumxcvfvvymcgtdgaonq.supabase.co" crossorigin />
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#222527;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;color:#fff}
+  .box{background:#4B5055;border-radius:24px;padding:40px 36px;width:100%;max-width:380px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+  .head{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:24px}
+  .head img{height:72px;background:transparent;border-radius:0;padding:0;margin:0}
+  .head .t{text-align:left;color:#fff;font-size:26px;line-height:1.1;font-family:'Space Grotesk',Inter,system-ui,sans-serif;font-weight:500}
+  form{display:grid;gap:14px;text-align:left}
+  input,select{padding:13px 14px;border-radius:10px;border:none;background:#fff;color:#222527;font:inherit;width:100%}
+  select option{color:#222527}
+  td select option{color:#222527}
+  button{padding:14px;border-radius:999px;border:none;background:#222527;color:#fff;font-weight:400;cursor:pointer;margin-top:6px}
+  button:disabled{opacity:.6;cursor:wait}
+  button.small{padding:8px 14px;font-size:13px;margin:0}
+  button.ghost{background:transparent;border:1px solid rgba(255,255,255,.4)}
+  #err{min-height:20px;font-size:13px;color:#ffd7d7;margin-top:10px}
+  .orline2{display:flex;align-items:center;gap:10px;color:#c9cccf;font-size:12px;margin:16px 0 4px}
+  .orline2::before,.orline2::after{content:"";flex:1;border-top:1px solid rgba(255,255,255,.2)}
+  #googleBtn{width:100%;background:#fff;color:#222527;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px}
+  #googleBtn .g{color:#4285F4;font-weight:700;font-size:18px}
+  #googleBtn,#go{transition:transform .2s ease}
+  #googleBtn:hover,#go:hover{transform:translateY(-2px)}
+  .backarrow{color:#8e9296;font-size:24px;line-height:1;padding:6px 10px;border-radius:999px;text-decoration:none;transition:transform .2s ease,color .2s ease}
+  .backarrow:hover{color:#FFC400;transform:translateY(-2px)}
+  .backrow{text-align:left;margin-bottom:4px}
+  a.back{display:inline-block;margin-top:20px;color:#e8eaeb;font-size:14px;text-decoration:none}
+  a.back:hover{text-decoration:underline}
+  /* dashboard */
+  #dash{display:none;width:100%;max-width:1240px}
+  .dash-top{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+  .dash-top img{height:48px;background:transparent;padding:0}
+  .dash-top .who{color:#c9cccf;font-size:13px}
+  .dash-top .sp{flex:1}
+  .panel{background:#4B5055;border-radius:20px;padding:24px;margin-bottom:18px}
+  .panel-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .panel-head h2{font-size:18px;margin:0;font-family:'Space Grotesk',Inter,system-ui,sans-serif;font-weight:500}
+  .dash-top b{font-family:'Space Grotesk',Inter,system-ui,sans-serif;font-weight:500}
+  .panel-head .sp{flex:1}
+  .tabs{display:flex;gap:8px;margin-bottom:18px}
+  .tabs button{flex:0 0 auto;padding:10px 22px;margin:0}
+  .tabs button.active{background:#fff;color:#222527}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{text-align:left;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#d6d8da;padding:8px;border-bottom:1px solid rgba(255,255,255,.2)}
+  td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.12);vertical-align:top}
+  td a{color:#fff}
+  .muted{color:#d6d8da;font-size:12px}
+  .rowbtns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:baseline}
+  .dot.green{background:#3ddc84}
+  .dot.red{background:#ff5a5a}
+  .trashbtn{position:relative;background:transparent;border:1px solid rgba(255,90,90,.65);border-radius:10px;padding:8px 10px;margin:0;display:inline-flex;cursor:pointer}
+  .trashbtn:hover{background:rgba(255,90,90,.15)}
+  .tcount{position:absolute;top:-8px;right:-8px;background:#ff5a5a;color:#fff;font-size:11px;font-weight:700;border-radius:999px;min-width:20px;height:20px;display:none;place-items:center;padding:0 5px}
+  .selbox{width:18px;height:18px;padding:0;margin:0;background:transparent;accent-color:#ff5a5a;cursor:pointer}
+  .delbar{display:none;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .delbar.on{display:flex}
+  .delbar button{margin:0}
+  .delbar .del{background:#ff5a5a;color:#fff;font-weight:700}
+  .stat3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 4px}
+  .stat3>div{background:rgba(255,255,255,.07);border-radius:12px;padding:12px;text-align:center}
+  .stat3 b{display:block;font-size:22px;font-family:'Space Grotesk',Inter,system-ui,sans-serif}
+  .stat3 span{font-size:11px;color:#d6d8da;text-transform:uppercase;letter-spacing:.1em}
+  .vchart{display:flex;align-items:flex-end;gap:8px;margin-top:14px;min-height:230px;padding:12px 4px 0;overflow-x:auto}
+  .vcol{flex:1 1 0;min-width:64px;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .vval{font-weight:700;font-size:13px;white-space:nowrap}
+  .vtrack{width:100%;max-width:56px;height:170px;background:transparent;border-radius:10px;display:flex;align-items:flex-end;overflow:hidden}
+  .vfill{width:100%;height:0;background:linear-gradient(180deg,#ffdf6b,#FFC400);border-radius:10px;transition:height .9s ease}
+  .vname{font-size:12px;font-weight:700;text-align:center;word-break:break-word}
+  .vtype{font-size:11px;color:#d6d8da;text-align:center}
+  .empty{text-align:center;padding:28px 0;color:var(--concrete)}
+  .clockwrap{display:flex;align-items:center;gap:8px}
+  #ticks line{stroke:#c9cccf;stroke-width:1.6}
+  .clocktxt b{display:block;font-size:15px}
+  .clocktxt span{font-size:11px;color:#c9cccf}
+  #revMode{margin-top:8px;padding:7px 10px;font-size:12px;border-radius:999px}
+  #revMode option{color:#222527}
+  .stat3>div{transition:transform .2s ease,box-shadow .2s ease}
+  .stat3>div:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.3)}
+  .box{animation:riseIn .45s ease}
+  .panel{animation:riseIn .45s ease}
+  @keyframes riseIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .tabs button{transition:background .2s ease,color .2s ease}
+  table tr:hover td{background:rgba(255,255,255,.05)}
+  body{background:radial-gradient(1100px 550px at 85% -10%,#3b4146 0%,#222527 55%)}
+  .empty svg{display:block;margin:0 auto 10px}
+  .contactbtn{background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:8px 14px;font-size:13px;color:#fff;cursor:pointer;margin:0;white-space:nowrap}
+  .addgrid{display:grid;grid-template-columns:1fr 160px;gap:12px}
+  .addgrid.narrow{grid-template-columns:210px 1fr}
+  .checkrow{display:flex;align-items:center;gap:10px;color:#fff;font-size:14px}
+  .checkrow input{width:20px;height:20px;accent-color:#222527}
+  #addWrap{display:none;margin-top:16px}
+  #confirmWrap{display:none;margin-top:16px;border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:18px}
+  #confirmWrap h3{margin-bottom:10px}
+  #confirmWrap .row{display:flex;gap:16px;margin-top:8px}
+  #confirmWrap .row button{flex:1}
+  @media(max-width:640px){.addgrid,.addgrid.narrow{grid-template-columns:1fr}table{font-size:12px}}
+</style>
+</head>
+<body>
+  <!-- LOGIN -->
+  <div class="box" id="loginBox">
+    <div class="backrow"><a class="backarrow" href="index.html" aria-label="Back to site">←</a></div>
+    <div class="head">
+      <img src="logo-icon.png" alt="Hwy . Webs logo" />
+      <div class="t">DEV.<br/>Console</div>
+    </div>
+    <div id="loginView">
+      <form id="f">
+        <input id="email" required type="email" placeholder="Email" autocomplete="username" />
+        <input id="pw" required type="password" placeholder="Password" autocomplete="current-password" />
+        <button id="go" type="submit">Enter →</button>
+      </form>
+      <div class="orline2"><span>or</span></div>
+      <button id="googleBtn" type="button"><span class="g">G</span> Continue with Google</button>
+      <div id="err"></div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dash">
+    <div class="dash-top">
+      <a class="backarrow" href="index.html" aria-label="Back to site">←</a>
+      <img src="logo-icon.png" alt="Hwy . Webs logo" />
+      <div><b>Dashboard</b><div class="who" id="who"></div></div>
+      <div class="sp"></div>
+      <div class="clockwrap"><svg id="clock" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#c9cccf" stroke-width="1.6"/><g id="ticks"></g><line id="chH" x1="20" y1="20" x2="20" y2="11" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><line id="chM" x1="20" y1="20" x2="20" y2="7" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><line id="chS" x1="20" y1="22" x2="20" y2="6" stroke="#FFC400" stroke-width="1" stroke-linecap="round"/><circle cx="20" cy="20" r="1.8" fill="#FFC400"/></svg><div class="clocktxt"><b id="clockTime">--:--</b><span id="clockDate"></span></div></div>
+      <button class="small ghost" id="out" type="button">Log out</button>
+    </div>
+    <div class="tabs">
+      <button class="small active" id="tabSites" type="button">Sites</button>
+      <button class="small ghost" id="tabLeads" type="button">Leads</button>
+      <button class="small ghost" id="tabAnalytics" type="button">Analytics</button>
+    </div>
+    <div class="panel" id="sitesPanel">
+      <div class="panel-head">
+        <h2>All sites</h2>
+        <div class="sp"></div>
+        <button class="small ghost" id="addBtn" type="button">Add</button>
+        <button class="trashbtn" id="trashSites" type="button" title="Select to delete" onclick="toggleSelMode('sites')"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M6.5 4V2.6c0-.3.2-.6.5-.6h2c.3 0 .5.3.5.6V4M4.2 4l.6 9.2c0 .4.4.8.8.8h4.8c.4 0 .8-.4.8-.8L11.8 4" stroke="#ff5a5a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.6 7v4M9.4 7v4" stroke="#ff5a5a" stroke-width="1.4" stroke-linecap="round"/></svg><span class="tcount" style="display:none">0</span></button>
+      </div>
+      <div id="allList"><p class="muted">Loading…</p></div>
+      <div class="delbar" id="sitesDel"><button class="del" id="sitesDelBtn" type="button" onclick="delSelected('sites')">Delete (0)</button><button class="small ghost" type="button" onclick="toggleSelMode('sites')">Cancel</button></div>
+      <div id="addWrap">
+        <form id="addF">
+          <div class="addgrid">
+            <input id="aName" required placeholder="Site name" />
+            <select id="aStatus"><option value="todo">Not started</option><option value="progress" selected>In progress</option><option value="done">Finished</option></select>
+          </div>
+          <div class="addgrid">
+            <input id="aUrl" placeholder="Link (https://…)" />
+            <input id="aFile" placeholder="HTML file (e.g. index.html)" />
+          </div>
+          <input id="aNotes" placeholder="Notes (optional)" />
+          <label class="checkrow"><input id="aContacted" type="checkbox" /> Contacted them</label>
+          <button type="submit">Review →</button>
+        </form>
+      </div>
+      <div id="confirmWrap">
+        <h3>Are you sure?</h3>
+        <div id="confirmSummary" class="muted"></div>
+        <div class="row">
+          <button type="button" id="confirmBack" class="ghost">Back</button>
+          <button type="button" id="confirmYes">Yes, add site</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="analyticsPanel" style="display:none">
+      <div class="panel-head"><h2>Analytics</h2><div class="sp"></div><button class="trashbtn" id="trashSales" type="button" title="Select sales to delete" onclick="toggleSelMode('sales')"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M6.5 4V2.6c0-.3.2-.6.5-.6h2c.3 0 .5.3.5.6V4M4.2 4l.6 9.2c0 .4.4.8.8.8h4.8c.4 0 .8-.4.8-.8L11.8 4" stroke="#ff5a5a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.6 7v4M9.4 7v4" stroke="#ff5a5a" stroke-width="1.4" stroke-linecap="round"/></svg><span class="tcount" style="display:none">0</span></button></div>
+      <form id="saleF">
+        <div class="addgrid">
+          <input id="sName" required placeholder="Business name" autocomplete="off" />
+          <input id="sAmount" required type="number" min="0" step="0.01" placeholder="Money made ($)" />
+        </div>
+        <div class="addgrid narrow">
+          <input id="sType" required list="bizTypes" placeholder="Type" autocomplete="off" />
+          <input id="sRecur" type="number" min="0" step="0.01" placeholder="Recurring $/mo (optional)" />
+        </div>
+        <datalist id="bizTypes"><option>Restaurant / Cafe</option><option>Retail / Shop</option><option>Startup</option><option>Local service</option><option>Agency / Creative</option><option>Real estate</option><option>Health / Fitness</option><option>Other</option></datalist>
+        <input id="sNotes" placeholder="Notes (optional)" />
+        <button type="submit">Add sale</button>
+      </form>
+      <div id="salesMsg" class="muted" style="margin-top:8px"></div>
+      <div class="stat3" id="salesStats" style="display:none">
+        <div id="revCell"><b id="stTotal">$0</b><span id="stTotalCap">Revenue · all time</span>
+          <select id="revMode"><option value="rev">Revenue</option><option value="monthly">Monthly earnings</option></select></div>
+        <div><b id="stDeals">0</b><span>Deals</span></div>
+        <div id="monCell"><b id="stMonthly">$0</b><span>Monthly · recurring</span></div>
+      </div>
+      <div id="salesChart" style="margin-top:6px"></div>
+      <div class="panel-head" style="margin-top:18px"><h2 style="font-size:15px">Recent sales</h2></div>
+      <div id="salesList"><p class="muted">Loading…</p></div>
+      <div class="delbar" id="salesDel"><button class="del" id="salesDelBtn" type="button" onclick="delSelected('sales')">Delete (0)</button><button class="small ghost" type="button" onclick="toggleSelMode('sales')">Cancel</button></div>
+    </div>
+    <div class="panel" id="leadsPanel" style="display:none">
+      <div class="panel-head"><h2>Leads</h2><div class="sp"></div><button class="small ghost" id="clearLeads" type="button">Clear</button><button class="trashbtn" id="trashLeads" type="button" title="Select to delete" onclick="toggleSelMode('leads')"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M6.5 4V2.6c0-.3.2-.6.5-.6h2c.3 0 .5.3.5.6V4M4.2 4l.6 9.2c0 .4.4.8.8.8h4.8c.4 0 .8-.4.8-.8L11.8 4" stroke="#ff5a5a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.6 7v4M9.4 7v4" stroke="#ff5a5a" stroke-width="1.4" stroke-linecap="round"/></svg><span class="tcount" style="display:none">0</span></button></div>
+      <div id="leadsList"><p class="muted">Loading…</p></div>
+      <div class="delbar" id="leadsDel"><button class="del" id="leadsDelBtn" type="button" onclick="delSelected('leads')">Delete (0)</button><button class="small ghost" type="button" onclick="toggleSelMode('leads')">Cancel</button></div>
+    </div>
+  </div>
+
+<script>
+const SUPABASE_URL = "https://fumxcvfvvymcgtdgaonq.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_QGolgdDRloafuOCzj8oG5g_j28nmI9v";
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Safety: never stay logged in across refresh - sign out on every load,
+// except when returning from Google OAuth (?code=) so the exchange can finish
+async function devBoot(){
+  const returning=new URLSearchParams(location.search).has('code')||location.hash.indexOf('access_token')!==-1;
+  if(!returning){try{await client.auth.signOut();}catch(e){}}
+  else{
+    for(let i=0;i<40;i++){
+      try{const s=await client.auth.getSession();if(s.data.session)break;}catch(e){}
+      await new Promise(function(r){setTimeout(r,250);});
+    }
+    try{history.replaceState(null,'',location.pathname);}catch(e){}
+  }
+  refresh();
+}
+const loginBox = document.getElementById('loginBox');
+const dash = document.getElementById('dash');
+const err = document.getElementById('err');
+const go = document.getElementById('go');
+// DEMO ONLY bypass flag (remove anytime): ?demo=1 skips login - needs temp public-read policies
+const DEMO = new URLSearchParams(location.search).has('demo');
+const STATUS_LABEL = {todo:'Not started',progress:'In progress',done:'Finished'};
+function fmt(d){try{return new Date(d).toLocaleString();}catch(e){return d||'—';}}
+function esc(x){return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function row(s){
+  const contacted = !!s.contacted;
+  return '<tr>'+(SELMODE.sites?selBox('sites',s.id):'')+'<td><b>'+esc(s.name)+'</b><div class="muted">'+esc(s.notes||'')+'</div></td>'
+    +'<td>'+esc(STATUS_LABEL[s.status]||s.status)+'</td>'
+    +'<td>'+(s.url?'<a href="'+esc(s.url)+'" target="_blank" rel="noopener">Open ↗</a>':'<span class="muted">—</span>')+'</td>'
+    +'<td>'+esc(s.html_file||'—')+'</td>'
+    +'<td><button class="contactbtn" onclick="flipContacted('+s.id+','+(!contacted)+')"><span class="dot '+(contacted?'green':'red')+'"></span>'+(contacted?'Contacted':'Not contacted')+'</button></td>'
+    +'<td class="muted">'+fmt(s.updated_at)+'</td>'
+    +'<td><div class="rowbtns">'
+    +'<select class="small" onchange="setStatus('+s.id+',this.value)" style="border-radius:999px;padding:8px 10px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff">'
+    +'<option value="todo"'+(s.status==='todo'?' selected':'')+'>Not started</option>'
+    +'<option value="progress"'+(s.status==='progress'?' selected':'')+'>In progress</option>'
+    +'<option value="done"'+(s.status==='done'?' selected':'')+'>Finished</option></select>'
+    +'</div></td></tr>';
+}
+function table(list){
+  if(!list.length) return '<p class="muted">Nothing here yet.</p>';
+  return '<table><tr>'+(SELMODE.sites?'<th></th>':'')+'<th>Site</th><th>Status</th><th>Link</th><th>HTML file</th><th>Contact</th><th>Last change</th><th></th></tr>'+list.map(row).join('')+'</table>';
+}
+async function loadSites(){
+  const listEl = document.getElementById('allList');
+  const slowNote = setTimeout(()=>{
+    listEl.innerHTML = '<p class="muted">Waking database… (free tier sleeps when idle, first load can take ~10s)</p>';
+  },2500);
+  const { data, error } = await client.from('sites').select('id,name,status,url,html_file,notes,contacted,updated_at').order('updated_at',{ascending:false});
+  clearTimeout(slowNote);
+  if(error){
+    listEl.innerHTML = '<p class="muted">Could not load sites — '+esc(error.message)+'</p>';
+    return;
+  }
+  listEl.innerHTML = table(data);
+}
+const SEL={sites:new Set(),leads:new Set(),sales:new Set()};
+const SELMODE={sites:false,leads:false,sales:false};
+const KINDMAP={
+  sites:{table:'sites',reload:function(){loadSites();},bar:'sitesDel',btn:'sitesDelBtn',trash:'trashSites'},
+  leads:{table:'leads',reload:function(){loadLeads();},bar:'leadsDel',btn:'leadsDelBtn'},
+  sales:{table:'sales',reload:function(){loadSales();},bar:'salesDel',btn:'salesDelBtn',trash:'trashSales'}
+};
+KINDMAP.leads.trash='trashLeads';
+function selBox(kind,id){
+  return '<td><input type="checkbox" class="selbox"'+(SEL[kind].has(id)?' checked':'')+' onchange="toggleSel(\''+kind+'\','+id+',this.checked)"></td>';
+}
+function toggleSel(kind,id,on){if(on)SEL[kind].add(id);else SEL[kind].delete(id);syncSel(kind);}
+function syncSel(kind){
+  const m=KINDMAP[kind],n=SEL[kind].size;
+  const badge=document.querySelector('#'+m.trash+' .tcount');
+  if(badge){badge.textContent=n;badge.style.display=n>0?'grid':'none';}
+  document.getElementById(m.bar).classList.toggle('on',SELMODE[kind]);
+  document.getElementById(m.btn).textContent='Delete ('+n+')';
+}
+function toggleSelMode(kind){
+  SELMODE[kind]=!SELMODE[kind];SEL[kind].clear();
+  KINDMAP[kind].reload();syncSel(kind);
+}
+async function delSelected(kind){
+  const ids=[...SEL[kind]];
+  if(!ids.length)return;
+  if(!confirm('Delete '+ids.length+' item'+(ids.length>1?'s':'')+'? This cannot be undone.'))return;
+  const r=await client.from(KINDMAP[kind].table).delete().in('id',ids);
+  if(r.error){alert(r.error.message);return;}
+  SELMODE[kind]=false;SEL[kind].clear();
+  KINDMAP[kind].reload();syncSel(kind);
+}
+async function setStatus(id,status){
+  await client.from('sites').update({status}).eq('id',id);
+  loadSites();
+}
+async function flipContacted(id,contacted){
+  await client.from('sites').update({contacted}).eq('id',id);
+  loadSites();
+}
+async function refresh(){
+  const { data } = await client.auth.getSession();
+  const user = data.session && data.session.user;
+  if(user || DEMO){
+    document.getElementById('who').textContent = user ? user.email : 'Demo mode — remove before sharing';
+    loginBox.style.display = 'none';
+    dash.style.display = 'block';
+    loadSites();
+    loadLeads();
+  } else {
+    loginBox.style.display = 'block';
+    dash.style.display = 'none';
+  }
+}
+document.getElementById('f').onsubmit = async e => {
+  e.preventDefault();
+  err.textContent = '';
+  go.disabled = true;
+  const { error } = await client.auth.signInWithPassword({
+    email: document.getElementById('email').value.trim(),
+    password: document.getElementById('pw').value
+  });
+  go.disabled = false;
+  if(error){ err.textContent = error.message; return; }
+  refresh();
+};
+document.getElementById('googleBtn').onclick=async()=>{
+  err.textContent='';
+  try{
+    const page=location.href.split('#')[0].split('?')[0];
+    const r=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:page}});
+    if(r.error)throw r.error;
+  }catch(e){err.textContent=e.message||e;}
+};
+const addBtn = document.getElementById('addBtn');
+const addWrap = document.getElementById('addWrap');
+const confirmWrap = document.getElementById('confirmWrap');
+const tabSites = document.getElementById('tabSites');
+const tabLeads = document.getElementById('tabLeads');
+const tabAnalytics = document.getElementById('tabAnalytics');
+const sitesPanel = document.getElementById('sitesPanel');
+const leadsPanel = document.getElementById('leadsPanel');
+const analyticsPanel = document.getElementById('analyticsPanel');
+function showTab(which){
+  const tabs = {sites: [tabSites, sitesPanel], leads: [tabLeads, leadsPanel], analytics: [tabAnalytics, analyticsPanel]};
+  Object.keys(tabs).forEach(k=>{
+    const on = k === which;
+    tabs[k][0].classList.toggle('active', on);
+    tabs[k][0].classList.toggle('ghost', !on);
+    tabs[k][1].style.display = on ? 'block' : 'none';
+  });
+  if(which === 'leads') loadLeads();
+  if(which === 'analytics') loadSales();
+}
+tabSites.onclick = () => showTab('sites');
+tabLeads.onclick = () => showTab('leads');
+tabAnalytics.onclick = () => showTab('analytics');
+function leadsSeenAt(){
+  try{return Date.parse(localStorage.getItem('hwy-leads-seen')||'0')||0;}catch(e){return 0;}
+}
+function markLeadsSeen(){
+  try{localStorage.setItem('hwy-leads-seen',new Date().toISOString());}catch(e){}
+  document.getElementById('tabLeads').textContent='Leads';
+}
+async function loadLeads(){
+  const listEl = document.getElementById('leadsList');
+  const { data, error } = await client.from('leads').select('id,first_name,last_name,email,phone,purpose,purpose_other,source,created_at').order('created_at',{ascending:false});
+  if(error){
+    listEl.innerHTML = '<p class="muted">Could not load leads — '+esc(error.message)+'</p>';
+    return;
+  }
+  const unread = data.filter(l=>Date.parse(l.created_at)>leadsSeenAt()).length;
+  document.getElementById('tabLeads').textContent = unread>0 ? 'Leads ('+unread+')' : 'Leads';
+  if(document.getElementById('leadsPanel').style.display==='block') markLeadsSeen();
+  if(!data.length){ listEl.innerHTML = '<div class="empty"><svg width="54" height="54" viewBox="0 0 54 54" fill="none"><path d="M34 33A15 15 0 1 1 21 9a12 12 0 1 0 13 24z" fill="currentColor" opacity=".55"/><text x="36" y="20" font-size="13" font-weight="700" fill="currentColor">Z</text><text x="43" y="11" font-size="9" font-weight="700" fill="currentColor" opacity=".6">Z</text></svg><p class="muted">No requests yet…</p></div>'; return; }
+  listEl.innerHTML = '<table><tr>'+(SELMODE.leads?'<th></th>':'')+'<th>Name</th><th>Contact</th><th>Purpose</th><th>Heard via</th><th>Received</th></tr>'
+    + data.map(l=>'<tr>'+(SELMODE.leads?selBox('leads',l.id):'')+'<td><b>'+esc(l.first_name+' '+l.last_name)+'</b></td>'
+    + '<td>'+esc(l.email||'—')+'<div class="muted">'+esc(l.phone||'')+'</div></td>'
+    + '<td>'+esc(l.purpose||'—')+(l.purpose_other?'<div class="muted">'+esc(l.purpose_other)+'</div>':'')+'</td>'
+    + '<td>'+esc(l.source||'—')+'</td>'
+    + '<td class="muted">'+fmt(l.created_at)+'</td></tr>').join('') + '</table>';
+}
+let pending = null;
+addBtn.onclick = () => {
+  const open = addWrap.style.display === 'block';
+  addWrap.style.display = open ? 'none' : 'block';
+  confirmWrap.style.display = 'none';
+  addBtn.textContent = open ? 'Add' : 'Close';
+};
+document.getElementById('confirmBack').onclick = () => {
+  confirmWrap.style.display = 'none';
+  addWrap.style.display = 'block';
+};
+document.getElementById('addF').onsubmit = e => {
+  e.preventDefault();
+  pending = {
+    name: document.getElementById('aName').value.trim(),
+    status: document.getElementById('aStatus').value,
+    url: document.getElementById('aUrl').value.trim() || null,
+    html_file: document.getElementById('aFile').value.trim() || null,
+    notes: document.getElementById('aNotes').value.trim() || null,
+    contacted: document.getElementById('aContacted').checked
+  };
+  document.getElementById('confirmSummary').innerHTML =
+    '<b style="color:#fff">'+esc(pending.name)+'</b> — '+esc(STATUS_LABEL[pending.status])
+    +'<br/>Link: '+esc(pending.url||'—')+' · File: '+esc(pending.html_file||'—')
+    +' · Contacted: '+(pending.contacted?'Yes':'No');
+  addWrap.style.display = 'none';
+  confirmWrap.style.display = 'block';
+};
+document.getElementById('confirmYes').onclick = async () => {
+  if(!pending) return;
+  const { error } = await client.from('sites').insert(pending);
+  if(error){ alert(error.message); return; }
+  pending = null;
+  document.getElementById('addF').reset();
+  confirmWrap.style.display = 'none';
+  addBtn.textContent = 'Add';
+  loadSites();
+};
+function money(n){return '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});}
+let LASTSALES=[];
+let revMode='rev';
+let revCellBase=0,monCellBase=0;
+function monthStart(){const d=new Date();return new Date(d.getFullYear(),d.getMonth(),1);}
+function monthlyFig(){
+  const ms=monthStart().getTime();
+  let one=0,rec=0;
+  LASTSALES.forEach(function(s){if(Date.parse(s.created_at)>=ms)one+=Number(s.amount);if(Number(s.recurring_monthly)>0)rec+=Number(s.recurring_monthly);});
+  return one+rec;
+}
+function renderSalesStats(){
+  const total=LASTSALES.reduce(function(a,s){return a+Number(s.amount);},0);
+  const rec=LASTSALES.reduce(function(a,s){return a+(Number(s.recurring_monthly)>0?Number(s.recurring_monthly):0);},0);
+  revCellBase = revMode==='monthly' ? monthlyFig() : total;
+  monCellBase = rec;
+  document.getElementById('salesStats').style.display='grid';
+  document.getElementById('stTotal').textContent=money(revCellBase);
+  document.getElementById('stTotalCap').textContent=revMode==='monthly'?'Monthly earnings · resets 1st':'Revenue · all time';
+  document.getElementById('stDeals').textContent=LASTSALES.length;
+  document.getElementById('stMonthly').textContent=money(monCellBase);
+}
+function paintSplit(cell,total,r){
+  const a=total*r/100,b=total-a;
+  cell.querySelector('b').textContent=r+' / '+(100-r);
+  cell.querySelector('span').textContent=money(a)+' · '+money(b);
+}
+function attachSplit(cellId,getVal){
+  const cell=document.getElementById(cellId);
+  if(!cell)return;
+  let startX=0,on=false;
+  cell.style.touchAction='none';cell.style.userSelect='none';cell.style.cursor='grab';
+  cell.addEventListener('pointerdown',function(e){
+    if(e.target.tagName==='SELECT')return;
+    on=true;startX=e.clientX;
+    try{cell.setPointerCapture(e.pointerId);}catch(err){}
+    cell.style.cursor='grabbing';paintSplit(cell,getVal(),50);
+  });
+  cell.addEventListener('pointermove',function(e){
+    if(!on)return;
+    const r=Math.max(0,Math.min(100,50+Math.round((e.clientX-startX)/12)*10));
+    paintSplit(cell,getVal(),r);
+  });
+  ['pointerup','pointercancel'].forEach(function(ev){cell.addEventListener(ev,function(){if(!on)return;on=false;cell.style.cursor='grab';renderSalesStats();});});
+}
+function setRot(id,deg){const el=document.getElementById(id);if(el)el.setAttribute('transform','rotate('+deg+' 20 20)');}
+function tickClock(){
+  const now=new Date(),h=now.getHours()%12,m=now.getMinutes(),s=now.getSeconds();
+  setRot('chH',h*30+m*0.5);setRot('chM',m*6+s*0.1);setRot('chS',s*6);
+  const t=document.getElementById('clockTime'),d=document.getElementById('clockDate');
+  if(t)t.textContent=now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  if(d)d.textContent=now.toLocaleDateString([],{weekday:'short',month:'short',day:'numeric'});
+}
+function abbrev(n){n=(n||'').trim();if(!n)return'—';const w=n.split(/\s+/);if(w.length>1)return w.slice(0,3).map(function(x){return x[0];}).join('').toUpperCase();return n.length>8?n.slice(0,7)+'…':n;}
+async function loadSales(){
+  const chart=document.getElementById('salesChart'),list=document.getElementById('salesList');
+  try{
+    const {data,error}=await client.from('sales').select('id,business_name,amount,business_type,recurring_monthly,notes,created_at').order('created_at',{ascending:false});
+    if(error)throw error;
+    const by={};
+    data.forEach(s=>{
+      const label=(s.business_name||'Unnamed').trim()||'Unnamed';
+      const k=label.toLowerCase();
+      (by[k]=by[k]||{label:label,type:'',total:0,recur:0,n:0});
+      by[k].label=label;by[k].total+=Number(s.amount);by[k].n++;
+      by[k].type=s.business_type||by[k].type;
+      if(Number(s.recurring_monthly)>0)by[k].recur+=Number(s.recurring_monthly);
+    });
+    const groups=Object.values(by).sort((a,b)=>b.total-a.total);
+    const total=groups.reduce((a,g)=>a+g.total,0);
+    LASTSALES=data||[];
+    renderSalesStats();
+    if(!groups.length){chart.innerHTML='<p class="muted">No sales yet — add your first one above.</p>';}
+    else{
+      const max=groups[0].total;
+      chart.innerHTML='<div class="vchart">'+groups.map(g=>'<div class="vcol"><div class="vval">'+money(g.total)+'</div>'
+        +'<div class="vtrack"><div class="vfill" data-h="'+Math.max(5,Math.round(g.total/max*100))+'"></div></div>'
+        +'<div class="vname" title="'+esc(g.label)+'">'+esc(abbrev(g.label))+'</div><div class="vtype">'+esc(g.type||'')+(g.n>1?' · '+g.n+' deals':'')+(g.recur>0?' · '+money(g.recur)+'/mo':'')+'</div></div>').join('')+'</div>';
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        chart.querySelectorAll('.vfill').forEach(b=>b.style.height=b.getAttribute('data-h')+'%');
+      }));
+    }
+    list.innerHTML=data.length?'<table><tr>'+(SELMODE.sales?'<th></th>':'')+'<th>Name</th><th>Type</th><th>Amount</th><th>Recurring</th><th>Received</th></tr>'
+      +data.slice(0,10).map(s=>'<tr>'+(SELMODE.sales?selBox('sales',s.id):'')+'<td><b>'+esc(s.business_name||'Unnamed')+'</b>'+(s.notes?'<div class="muted">'+esc(s.notes)+'</div>':'')+'</td><td>'+esc(s.business_type||'—')+'</td><td><b>'+money(s.amount)+'</b></td><td>'+(Number(s.recurring_monthly)>0?money(s.recurring_monthly)+'/mo':'<span class="muted">—</span>')+'</td><td class="muted">'+fmt(s.created_at)+'</td></tr>').join('')+'</table>'
+      :'<p class="muted">Nothing here yet.</p>';
+  }catch(e){chart.innerHTML='<p class="muted">Could not load sales — '+esc(e.message||e)+'</p>';}
+}
+document.getElementById('saleF').onsubmit=async e=>{
+  e.preventDefault();
+  const msg=document.getElementById('salesMsg');
+  const amount=parseFloat(document.getElementById('sAmount').value);
+  const bname=document.getElementById('sName').value.trim();
+  const type=document.getElementById('sType').value.trim();
+  if(!bname){msg.textContent='Enter the business name.';return;}
+  if(!(amount>0)){msg.textContent='Enter an amount above $0.';return;}
+  if(!type){msg.textContent='Enter the business type.';return;}
+  msg.textContent='';
+  const recur=parseFloat(document.getElementById('sRecur').value);
+  const {error}=await client.from('sales').insert({business_name:bname,amount:amount,business_type:type,recurring_monthly:recur>0?recur:null,notes:document.getElementById('sNotes').value.trim()||null});
+  if(error){msg.textContent=error.message;return;}
+  e.target.reset();
+  msg.textContent='Saved.';
+  setTimeout(()=>msg.textContent='',2500);
+  loadSales();
+};
+document.getElementById('out').onclick = async () => {
+  try{await client.auth.signOut();}catch(e){}
+  ['allList','leadsList','salesList','salesChart'].forEach(function(id){document.getElementById(id).innerHTML='';});
+  ['f','addF','saleF'].forEach(function(id){const fm=document.getElementById(id);if(fm)fm.reset();});
+  location.href='index.html';
+};
+document.getElementById('clearLeads').onclick = async () => {
+  if(!confirm('Delete ALL leads? This cannot be undone.'))return;
+  try{
+    const all=await client.from('leads').select('id');
+    if(all.error)throw all.error;
+    if(!all.data.length)return;
+    const del=await client.from('leads').delete().in('id',all.data.map(r=>r.id));
+    if(del.error)throw del.error;
+    loadLeads();
+  }catch(e){alert(e.message||e);}
+};
+document.getElementById('revMode').onchange=function(e){revMode=e.target.value;renderSalesStats();};
+attachSplit('revCell',function(){return revCellBase;});
+attachSplit('monCell',function(){return monCellBase;});
+(function(){const g=document.getElementById('ticks');if(!g)return;let s='';for(let i=0;i<12;i++){s+='<line x1="20" y1="4.5" x2="20" y2="7.5" transform="rotate('+(i*30)+' 20 20)"/>';}g.innerHTML=s;})();
+setInterval(tickClock,1000);tickClock();
+setInterval(()=>{
+  if(document.getElementById('dash').style.display==='block') loadLeads();
+},30000);
+devBoot();
+</script>
+</body>
+</html>

@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HWY WEBS — Websites that ship fast</title>
+<link rel="icon" type="image/png" href="logo-icon.png" />
+<meta name="description" content="hwy.webs designs and builds fast websites for startups and local businesses. Hand-coded, SEO-ready." />
+<meta name="theme-color" content="#222527" />
+<meta property="og:title" content="HWY WEBS — Websites that ship fast" />
+<meta property="og:description" content="Design, build, e-commerce and growth. 7-day delivery. No page builders." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="hero-poster.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"hwy.webs","description":"Web design and development studio. Startup sites, e-commerce, landing pages, SEO and care plans.","slogan":"Websites that ship fast"}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --asphalt:#2e3134;
+    --asphalt-2:#3f4347;
+    --highway:#4B5055;
+    --concrete:#8e9296;
+    --concrete-light:#c9ccce;
+    --offwhite:#f2f3f4;
+    --dark:#222527;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  ::selection{background:var(--highway);color:#fff}
+  :focus-visible{outline:2px solid #fff;outline-offset:3px}
+  body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--asphalt);color:var(--offwhite)}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  button{font-family:inherit}
+  /* ---- nav (design 2) ---- */
+  nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:center;background:transparent;pointer-events:none;padding:14px 16px 0;transition:padding .3s ease}
+  nav.docked{padding:0}
+  .bar{pointer-events:auto;width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 32px;background:rgba(34,37,39,.94);border:1px solid rgba(255,255,255,.12);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.3);transform:translateY(-130%);transition:transform .4s ease,border-radius .3s ease,border-color .3s ease}
+  .bar.visible{transform:translateY(0)}
+  nav.docked .bar{border-radius:0;border-left:none;border-right:none;border-top:none}
+  .logo{display:flex;align-items:center;gap:14px;font-weight:900;letter-spacing:.08em}
+  .logo img{height:44px;width:auto;display:block}
+  .brand{font-family:'Space Grotesk',Inter,system-ui,sans-serif;font-size:15px;letter-spacing:.1em;color:#fff;white-space:nowrap}
+  .brand small{display:block;font-size:10px;letter-spacing:.18em;color:var(--concrete);font-weight:500}
+  .nav-links{display:flex;gap:22px;font-size:14px;text-transform:uppercase;letter-spacing:.12em;color:#d6d8da;white-space:nowrap;align-items:center}
+  .nav-links a:hover{color:#fff}
+  .nav-cta{background:#fff;color:var(--dark);border:none;border-radius:999px;padding:11px 22px;font-weight:700;font-size:14px;cursor:pointer;transition:transform .2s ease}
+  .nav-cta:hover{transform:translateY(-2px)}
+  /* ---- hero (design 2 frame, content 1) ---- */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#000 url('hero-poster.png') center/cover no-repeat;padding:120px 20px 0}
+  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0}
+  .vidCover{position:absolute;inset:0;z-index:1;background:#000 url('hero-poster.png') center/cover no-repeat;transition:opacity .4s ease;pointer-events:none}
+  .vidCover.hidden{opacity:0}
+  .hero::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(34,37,39,.45) 0%,rgba(34,37,39,.3) 40%,rgba(34,37,39,.68) 100%)}
+  .hero-content{position:relative;z-index:3;text-align:center;max-width:1000px;margin:0 auto}
+  .hero-badge{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#fff;padding:9px 18px;background:rgba(20,22,23,.68);border:1px solid rgba(255,255,255,.22);border-radius:999px;margin-bottom:20px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:#7DFF8A}
+  h1.hwy{font-family:'Space Grotesk',Inter,system-ui,sans-serif;font-size:clamp(44px,8vw,104px);line-height:.95;font-weight:700;letter-spacing:-.02em;color:#fff;text-shadow:0 8px 40px rgba(0,0,0,.55);text-wrap:balance}
+  .hero-sub{display:inline-block;font-family:'Space Grotesk',Inter,system-ui,sans-serif;font-size:clamp(15px,2.4vw,21px);font-weight:500;color:#fff;margin-top:18px;padding:12px 24px;background:rgba(20,22,23,.68);border:1px solid rgba(255,255,255,.18);border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);max-width:62ch}
+  .hero-ctas{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;border:1px solid #fff;transition:transform .2s ease,background .2s ease}
+  .btn-solid{background:#fff;color:var(--dark);border-color:#fff}
+  .btn-solid:hover{transform:translateY(-2px);background:var(--concrete-light)}
+  .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+  .hero-meta{display:flex;gap:32px;flex-wrap:wrap;justify-content:center;margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.2);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--concrete-light)}
+  .hero-meta b{display:block;font-size:26px;color:#fff;font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em}
+  .scrollHint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:4px;color:#fff;font-size:11px;letter-spacing:.3em;text-transform:uppercase;opacity:.9;transition:opacity .4s ease;pointer-events:none}
+  .scrollHint.hidden{opacity:0}
+  .scrollHint .arrow{font-size:18px;line-height:1;animation:bob 1.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+  /* marquee from content 1, restyled to highway */
+  .marquee{background:#151717;color:#fff;overflow:hidden;white-space:nowrap;border-top:1px solid rgba(255,255,255,.12)}
+  .marquee-track{display:inline-flex;animation:mq 22s linear infinite;padding:12px 0;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+  .marquee-track span{padding:0 22px;border-right:1px solid rgba(255,255,255,.2)}
+  @keyframes mq{to{transform:translateX(-50%)}}
+  .lane{height:14px;background:repeating-linear-gradient(90deg,#f5f5f5 0 60px,transparent 60px 110px)}
+  .wrap{max-width:1150px;margin:0 auto}
+  section.pad{padding:84px 28px}
+  .kicker{font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--concrete)}
+  h2.sec{font-family:'Space Grotesk',Inter,system-ui,sans-serif;font-size:clamp(32px,5vw,54px);font-weight:500;margin:12px 0 14px;line-height:1.05}
+  .light-sec{background:var(--offwhite);color:var(--dark)}
+  .light-sec .kicker{color:#6b7175}
+  .mid-sec{background:var(--asphalt-2);color:var(--offwhite)}
+  .dark-sec{background:var(--dark);color:var(--offwhite)}
+  .sec-sub{max-width:62ch;color:inherit;opacity:.8}
+  .grid3{display:grid;gap:16px;margin-top:32px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .card{background:#fff;border-radius:16px;padding:26px;color:var(--dark);transition:transform .25s ease,box-shadow .25s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.18)}
+  .card .num{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.2em;color:var(--concrete)}
+  .card h3{font-family:'Space Grotesk',sans-serif;font-weight:500;margin-bottom:8px;font-size:20px}
+  /* work cards with images (content 1 in design 2 cards) */
+  .work-grid{display:grid;gap:16px;margin-top:32px;grid-template-columns:1fr}
+  @media(min-width:760px){.work-grid{grid-template-columns:1fr 1fr}}
+  .work-card{position:relative;overflow:hidden;border-radius:16px;min-height:380px;display:flex;align-items:flex-end;cursor:pointer;color:#fff;isolation:isolate;border:1px solid rgba(0,0,0,.2);transition:transform .25s ease,box-shadow .25s ease;background:#111}
+  .work-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.3)}
+  .work-card img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .8s ease}
+  .work-card:hover img.bg{transform:scale(1.05)}
+  .work-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.72) 100%)}
+  .work-top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center}
+  .wtag{background:#fff;color:var(--dark);border-radius:999px;padding:8px 14px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+  .go{width:44px;height:44px;border-radius:50%;background:#fff;color:var(--dark);display:grid;place-items:center;font-size:18px;transition:transform .3s ease}
+  .work-card:hover .go{transform:rotate(45deg)}
+  .work-body{padding:24px;width:100%}
+  .work-body h3{font-family:'Space Grotesk',sans-serif;font-size:26px;margin-bottom:6px}
+  .work-body p{color:rgba(255,255,255,.85);font-size:15px;max-width:42ch}
+  /* story timeline */
+  .story{margin-top:40px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1fr}
+  @media(min-width:960px){.story{grid-template-columns:1fr 1.1fr}}
+  .story-media{position:relative;min-height:340px}
+  .story-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .story-badge{position:absolute;top:14px;left:14px;background:#fff;color:var(--dark);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border-radius:999px;font-weight:700}
+  .story-copy{padding:clamp(26px,4vw,44px)}
+  .timeline{margin-top:22px;border-top:1px solid rgba(255,255,255,.16)}
+  .tl{display:grid;grid-template-columns:86px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .tl b{font-family:'Space Grotesk',sans-serif;color:var(--dark);background:#fff;border-radius:999px;font-size:12px;letter-spacing:.08em;padding:7px 8px;height:max-content;text-align:center}
+  .tl p{font-size:15px;color:rgba(255,255,255,.85)}
+  .tl p strong{color:#fff}
+  /* accordion (content 1, highway style) */
+  .acc{margin-top:28px;border-top:1px solid rgba(0,0,0,.14)}
+  .light-sec .acc{border-color:rgba(0,0,0,.14)}
+  .acc-item{border-bottom:1px solid rgba(0,0,0,.14)}
+  .mid-sec .acc{border-color:rgba(255,255,255,.16)}
+  .mid-sec .acc-item{border-color:rgba(255,255,255,.16)}
+  .acc-btn{width:100%;background:none;border:0;color:inherit;display:flex;align-items:center;gap:16px;padding:22px 4px;cursor:pointer;text-align:left}
+  .acc-btn .num{font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.14em;background:#fff;color:var(--dark);border-radius:999px;padding:8px 12px;border:1px solid rgba(0,0,0,.12);flex-shrink:0}
+  .mid-sec .acc-btn .num{border-color:rgba(255,255,255,.2)}
+  .acc-btn h3{font-family:'Space Grotesk',sans-serif;font-size:clamp(22px,4vw,38px);flex:1;font-weight:700;letter-spacing:-.02em}
+  .acc-btn .plus{width:46px;height:46px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center;font-size:22px;transition:.3s ease;flex-shrink:0}
+  .acc-item.open .plus{background:#fff;color:var(--dark);border-color:#fff;transform:rotate(45deg)}
+  .acc-panel{max-height:0;overflow:hidden;transition:max-height .5s ease}
+  .acc-inner{padding:0 4px 26px 0;max-width:68ch}
+  .acc-inner p{opacity:.75;font-size:16px;margin-bottom:14px}
+  .pills{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{border:1px solid rgba(0,0,0,.2);background:#fff;color:var(--dark);padding:8px 14px;border-radius:999px;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+  .mid-sec .pill{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff}
+  .pill.solid{background:var(--dark);color:#fff;border-color:var(--dark)}
+  .mid-sec .pill.solid{background:#fff;color:var(--dark);border-color:#fff}
+  /* pricing (merged) */
+  .mid-sec .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:var(--offwhite);position:relative}
+  .mid-sec .card.featured{border-color:#fff;box-shadow:0 16px 44px rgba(0,0,0,.35)}
+  @media(min-width:900px){.mid-sec .card.featured{transform:scale(1.02)}}
+  @media(min-width:900px){.mid-sec .card.featured:hover{transform:scale(1.02) translateY(-4px)}}
+  .price{font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:700;margin:10px 0}
+  .price span{font-size:15px;font-weight:500;opacity:.65}
+  .card ul{list-style:none;margin:14px 0 20px}
+  .card li{padding:8px 0;border-bottom:1px solid rgba(0,0,0,.1);font-size:14px}
+  .mid-sec .card li{border-color:rgba(255,255,255,.14)}
+  .mid-sec .card li::before{content:"✓ ";font-weight:700}
+  .card .btn-card{display:inline-block;padding:13px 26px;border-radius:999px;background:var(--dark);color:#fff;font-weight:700;font-size:14px;border:none;cursor:pointer;width:100%;text-align:center}
+  .mid-sec .card .btn-card{background:#fff;color:var(--dark)}
+  .price-split{display:grid;gap:24px}
+  @media(min-width:800px){.price-split{grid-template-columns:1fr 1fr}}
+  .reassure{margin-top:26px;color:var(--concrete-light);font-size:14px}
+  /* stats */
+  .stats-band{background:var(--dark);padding:56px 28px}
+  .stats-grid{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));text-align:center;max-width:1150px;margin:0 auto;align-items:center}
+  .stat b{font-family:'Space Grotesk',sans-serif;font-size:clamp(48px,7vw,84px);font-weight:700;display:block;line-height:1}
+  .stat span{color:var(--concrete);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  /* manifesto */
+  .manifesto{background:var(--dark);color:#fff;text-align:center;padding:clamp(60px,8vw,100px) 24px;border-top:1px solid rgba(255,255,255,.12)}
+  .manifesto blockquote{font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,4.4vw,50px);letter-spacing:-.02em;line-height:1.05;max-width:26ch;margin:0 auto;text-wrap:balance}
+  .manifesto cite{display:block;margin-top:18px;font-style:normal;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--concrete)}
+  /* contact detailed */
+  .contact-line{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,3.4vw,30px);margin-top:14px}
+  .c-grid{display:grid;gap:24px;margin-top:28px}
+  @media(min-width:1000px){.c-grid{grid-template-columns:1.1fr .9fr;gap:36px}}
+  .field{margin-bottom:12px}
+  .field label{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--concrete-light);margin-bottom:8px}
+  .field input,.field textarea{width:100%;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font:inherit;outline:none}
+  .field input:focus,.field textarea:focus{border-color:#fff}
+  .field textarea{min-height:118px;resize:vertical}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:600px){.form-row{grid-template-columns:1fr}}
+  .info-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:22px}
+  .info-card h3{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--concrete-light);margin-bottom:10px}
+  .info-card p,.info-card a{font-size:16px;line-height:1.6}
+  .info-card a{border-bottom:1px solid #fff}
+  .bigstart{display:inline-block;margin-top:22px;padding:16px 38px;border-radius:999px;border:none;background:#fff;color:var(--dark);font-weight:700;font-size:17px;cursor:pointer;transition:transform .2s ease}
+  .bigstart:hover{transform:translateY(-2px)}
+  .rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+  footer{padding:24px;background:#151717;color:#8e9296;font-size:13px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  .flinks{display:flex;gap:18px;flex-wrap:wrap}
+  .flinks a:hover{color:#fff}
+  .flogo{position:relative;display:inline-block;width:32px;height:42px}
+  .flogo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .3s ease}
+  .flogo img.dark{opacity:0}
+  .flogo:hover img.light{opacity:0}
+  .flogo:hover img.dark{opacity:1}
+  /* subpages as highway modals */
+  .subpage{position:fixed;inset:0;z-index:50;display:flex;justify-content:center;align-items:stretch;padding:16px;visibility:hidden;opacity:0;transition:opacity .3s ease,visibility .3s;pointer-events:none}
+  .subpage.open{visibility:visible;opacity:1;pointer-events:auto}
+  .sp-backdrop{position:absolute;inset:0;background:rgba(15,17,18,.72);backdrop-filter:blur(6px)}
+  .sp-sheet{position:relative;background:var(--asphalt-2);color:var(--offwhite);max-width:960px;width:100%;max-height:calc(100dvh - 32px);overflow-y:auto;border:1px solid rgba(255,255,255,.16);border-radius:22px;transform:translateY(24px);transition:transform .4s ease}
+  .subpage.open .sp-sheet{transform:none}
+  .sp-hero{position:relative;min-height:260px;margin:12px 12px 0;display:flex;align-items:flex-end;color:#fff;overflow:hidden;border-radius:14px;isolation:isolate}
+  .sp-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+  .sp-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:rgba(0,0,0,.6)}
+  .sp-hero-top{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:center}
+  .sp-back{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--dark);border:none;border-radius:999px;padding:10px 18px;font-weight:700;font-size:13px;cursor:pointer}
+  .sp-hero-body{padding:64px 24px 24px;width:100%}
+  .sp-hero-body h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,5vw,56px);letter-spacing:-.02em}
+  .sp-body{padding:clamp(20px,4vw,36px)}
+  .sp-list{list-style:none;display:grid;gap:10px;margin-top:16px}
+  .sp-list li{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 14px;font-size:15px}
+  .sp-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .sp-related{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14)}
+  .sp-related a{border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:9px 16px;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+  .sp-related a:hover{background:#fff;color:var(--dark)}
+  /* quote modal (design 2) */
+  .overlay{position:fixed;inset:0;z-index:60;background:rgba(15,17,18,.72);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s ease}
+  .overlay.open{opacity:1;pointer-events:auto}
+  .modal{width:100%;max-width:560px;max-height:90vh;overflow:auto;background:var(--asphalt-2);border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:30px;position:relative;transform:translateY(46px) scale(.97);transition:transform .45s cubic-bezier(.3,1.2,.5,1);color:var(--offwhite)}
+  .overlay.open .modal{transform:none}
+  .mclose{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;font-size:15px;cursor:pointer}
+  .mdots{display:flex;gap:8px;justify-content:center;margin-bottom:18px}
+  .mdot{width:26px;height:6px;border-radius:999px;background:rgba(255,255,255,.2)}
+  .mdot.on{background:#fff}
+  .mstep{display:none}
+  .mstep.active{display:block;animation:slideIn .35s ease}
+  @keyframes slideIn{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+  .modal h3{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:500;margin-bottom:4px}
+  .msub{color:var(--concrete-light);font-size:14px;margin-bottom:16px}
+  .modal label.lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--concrete-light);display:block;margin:12px 0 6px}
+  .modal input[type=text],.modal input[type=email],.modal input[type=tel]{width:100%;padding:13px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font:inherit}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .orline{text-align:center;color:var(--concrete-light);font-size:15px;font-weight:700;letter-spacing:.3em;margin:12px 0 2px}
+  .modal.shake{animation:shake .45s ease}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(9px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+  .merr{min-height:20px;color:#ffb3b3;font-size:13px;margin-top:8px}
+  .mrow{display:flex;gap:12px;margin-top:10px}
+  .mrow button{flex:1}
+  .modal .mnext,.modal .msubmit{background:#fff;color:var(--dark);font-weight:700;border:none}
+  .modal .mback{background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff}
+  .modal button{padding:13px;border-radius:999px;cursor:pointer;font-size:15px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+  .chip{padding:10px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;font-size:14px;cursor:pointer}
+  .chip.on{background:#fff;color:var(--dark);font-weight:700;border-color:#fff}
+  .chips.col{flex-direction:column;align-items:stretch}
+  .chips.col .chip{text-align:left;border-radius:12px}
+  #qOtherWrap{display:none}
+  .road{position:relative;height:76px;margin:20px 0 8px}
+  .road::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:3px dashed rgba(255,255,255,.55)}
+  .env{position:absolute;top:50%;margin-top:-20px;left:0;width:58px;height:40px;background:#fff;border-radius:6px;animation:drive 2.2s ease-in-out infinite}
+  .env::before{content:"";position:absolute;left:0;right:0;top:0;border-left:29px solid transparent;border-right:29px solid transparent;border-top:20px solid var(--concrete)}
+  @keyframes drive{0%{left:0}50%{left:calc(100% - 58px)}100%{left:0}}
+  #sendClose{display:none;width:100%;margin-top:16px}
+  @media(max-width:560px){.frow{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
+  @media(max-width:720px){.nav-links a:not(.nav-cta){display:none}.bar{padding:14px 18px}}
+  /* ---- dev console: login + spreadsheet dashboard (sites / leads / analytics) ---- */
+  #sp-dev .box{background:#4B5055;border-radius:24px;padding:40px 36px;width:100%;max-width:380px;margin:0 auto;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+  #sp-dev .head{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:24px}
+  #sp-dev .head img{height:72px}
+  #sp-dev .head .t{text-align:left;color:#fff;font-size:26px;line-height:1.1;font-family:'Space Grotesk',Inter,system-ui,sans-serif;font-weight:500}
+  #sp-dev form{display:grid;gap:14px;text-align:left}
+  #sp-dev input,#sp-dev select{padding:13px 14px;border-radius:10px;border:none;background:#fff;color:#222527;font:inherit;width:100%}
+  #sp-dev select option{color:#222527}
+  #sp-dev button{padding:14px;border-radius:999px;border:none;background:#222527;color:#fff;font-weight:400;cursor:pointer;margin-top:6px;font-size:15px}
+  #sp-dev button:disabled{opacity:.6;cursor:wait}
+  #sp-dev button.small{padding:8px 14px;font-size:13px;margin:0}
+  #sp-dev button.ghost{background:transparent;border:1px solid rgba(255,255,255,.4)}
+  #sp-dev #err{min-height:20px;font-size:13px;color:#ffb3b3;margin-top:10px}
+  #sp-dev a.back{display:inline-block;margin-top:20px;color:#e8eaeb;font-size:14px;text-decoration:none}
+  #sp-dev a.back:hover{text-decoration:underline}
+  #sp-dev #dash{display:none;width:100%}
+  #sp-dev .dash-top{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+  #sp-dev .dash-top img{height:48px}
+  #sp-dev .dash-top .who{color:#c9cccf;font-size:13px}
+  #sp-dev .dash-top .sp{flex:1}
+  #sp-dev .dev-top{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  #sp-dev .panel{background:#4B5055;border-radius:20px;padding:24px;margin-bottom:18px}
+  #sp-dev .panel-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  #sp-dev .panel-head h2{font-size:18px;margin:0;font-family:'Space Grotesk',Inter,system-ui,sans-serif;font-weight:500}
+  #sp-dev .panel-head .sp{flex:1}
+  #sp-dev .tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+  #sp-dev .tabs button{flex:0 0 auto;padding:10px 22px;margin:0}
+  #sp-dev .tabs button.active{background:#fff;color:#222527}
+  #sp-dev table{width:100%;border-collapse:collapse;font-size:14px}
+  #sp-dev th{text-align:left;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#d6d8da;padding:8px;border-bottom:1px solid rgba(255,255,255,.2)}
+  #sp-dev td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.12);vertical-align:top}
+  #sp-dev td a{color:#fff}
+  #sp-dev td select option{color:#222527}
+  #sp-dev .muted{color:#d6d8da;font-size:12px}
+  #sp-dev .rowbtns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  #sp-dev .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+  #sp-dev .dot.green{background:#3ddc84}
+  #sp-dev .dot.red{background:#ff5a5a}
+  #sp-dev .contactbtn{background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:8px 14px;font-size:13px;color:#fff;white-space:nowrap}
+  #sp-dev .addgrid{display:grid;grid-template-columns:1fr 160px;gap:12px}
+  #sp-dev .checkrow{display:flex;align-items:center;gap:10px;color:#fff;font-size:14px}
+  #sp-dev .checkrow input{width:20px;height:20px;accent-color:#222527}
+  #sp-dev .empty{text-align:center;padding:28px 0;color:var(--concrete)}
+  #sp-dev .empty svg{display:block;margin:0 auto 10px}
+  #sp-dev #addWrap{display:none;margin-top:16px}
+  #sp-dev #confirmWrap{display:none;margin-top:16px;border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:18px}
+  #sp-dev #confirmWrap h3{margin-bottom:10px}
+  #sp-dev #confirmWrap .row{display:flex;gap:16px;margin-top:8px}
+  #sp-dev{padding:0}
+  #sp-dev .sp-sheet{max-width:none;width:100%;max-height:none;height:100dvh;border:none;border-radius:0}
+  #sp-dev #confirmWrap .row button{flex:1}
+  @media(max-width:640px){#sp-dev .addgrid{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none}.scrollHint .arrow,.marquee-track,.env{animation:none}}
+</style>
+</head>
+<body>
+
+<nav id="topnav">
+  <div class="bar" id="navbar">
+    <a class="logo" href="#top">
+      <img src="logo-icon.png" alt="HWY WEBS mark" />
+      <span class="brand">HIGHWAY WEBSITES<small>EST. 2024 · SHIPS FAST</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+      <button class="nav-cta qopen" type="button">Start →</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <video id="heroVideo" muted loop playsinline preload="auto" poster="hero-poster.png">
+    <source src="hero-instant.mp4" type="video/mp4" />
+    <source src="hero-highway-small.mp4" type="video/mp4" />
+  </video>
+  <div class="vidCover" id="vidCover"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Currently booking · Replies within 24 hours</div>
+    <h1 class="hwy">Websites that ship fast and bring work in.</h1>
+    <p class="hero-sub">hwy.webs builds hand-coded sites for startups and local brands. One page or six — each loads fast and tells visitors what to do next.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-solid" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">See the work ↗</button>
+      <button class="btn btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing: $699 + $29/mo</button>
+    </div>
+    <div class="hero-meta">
+      <div><b>48</b> sites shipped since 2024</div>
+      <div><b>7–14 days</b> typical delivery</div>
+      <div><b>98+</b> pagespeed target</div>
+    </div>
+  </div>
+  <div class="scrollHint" id="scrollHint">Scroll<span class="arrow">↓</span></div>
+</header>
+
+<div class="marquee"><div class="marquee-track" id="mq"><span>hand-coded</span><span>seo-first</span><span>e-commerce</span><span>landing pages</span><span>98+ pagespeed</span><span>no wordpress bloat</span><span>analytics</span><span>7-day delivery</span><span>hand-coded</span><span>seo-first</span><span>e-commerce</span><span>landing pages</span><span>98+ pagespeed</span><span>no wordpress bloat</span><span>analytics</span><span>7-day delivery</span></div></div>
+<div class="lane"></div>
+
+<section class="stats-band" aria-label="Proof">
+  <div class="stats-grid rv">
+    <div class="stat"><b><span data-count="48">48</span></b><span>sites shipped since 2024</span></div>
+    <div class="stat"><b><span data-count="1" data-prefix="&lt;" data-suffix="s">&lt;1s</span></b><span>load time target</span></div>
+    <div class="stat"><b><span data-count="7" data-suffix="-14">7-14</span></b><span>days typical delivery</span></div>
+    <div class="stat"><b><span data-count="24" data-suffix="h">24h</span></b><span>reply time · edits live fast</span></div>
+  </div>
+</section>
+
+<div class="lane"></div>
+
+<section class="pad light-sec" id="intro">
+  <div class="wrap rv">
+    <div class="kicker">Who we are</div>
+    <h2 class="sec">A small studio that designs, builds, and maintains sites that load fast.</h2>
+    <p class="sec-sub">No page builders. Hand-coded. Copy and SEO included — each page explains the offer in one screen so a stranger knows what to do in 5 seconds.</p>
+    <div class="grid3">
+      <div class="card"><div class="num">01</div><h3>Design</h3><p>Layouts drawn around your brand and content — never a recycled template.</p></div>
+      <div class="card"><div class="num">02</div><h3>Code</h3><p>Clean hand-written HTML, CSS and JS. Light pages that load fast and rank well.</p></div>
+      <div class="card"><div class="num">03</div><h3>Launch</h3><p>Testing, speed checks and go-live handled for you, with support after launch day.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="lane"></div>
+
+<section class="pad light-sec" id="work" style="background:#e9eaeb">
+  <div class="wrap rv">
+    <div class="kicker">Our craft</div>
+    <h2 class="sec">Recent builds.</h2>
+    <p class="sec-sub">Each build is hand-coded and responsive. Open any card to see what is included.</p>
+    <div class="work-grid">
+      <article class="work-card" tabindex="0" data-sp="sp-startups" role="link" aria-label="Open startup sites details">
+        <img class="bg" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop" alt="Startup analytics" loading="lazy">
+        <div class="work-top"><span class="wtag">Startups</span><span class="go">↗</span></div>
+        <div class="work-body"><h3>Launch</h3><p>Marketing sites in 7 days. Positioning, design, build, analytics.</p></div>
+      </article>
+      <article class="work-card" tabindex="0" data-sp="sp-ecommerce" role="link" aria-label="Open ecommerce details">
+        <img class="bg" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop" alt="Checkout" loading="lazy">
+        <div class="work-top"><span class="wtag">E-commerce</span><span class="go">↗</span></div>
+        <div class="work-body"><h3>Stores</h3><p>Shopify or headless builds with clear carts and express checkout.</p></div>
+      </article>
+      <article class="work-card" tabindex="0" data-sp="sp-landing" role="link" aria-label="Open landing pages details">
+        <img class="bg" src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1200&auto=format&fit=crop" alt="Landing page" loading="lazy">
+        <div class="work-top"><span class="wtag">Landing</span><span class="go">↗</span></div>
+        <div class="work-body"><h3>Landing pages</h3><p>Ad-ready pages with two variants and sub-second loads.</p></div>
+      </article>
+      <article class="work-card" tabindex="0" data-sp="sp-redesign" role="link" aria-label="Open redesign details">
+        <img class="bg" src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=1200&auto=format&fit=crop" alt="Redesign" loading="lazy">
+        <div class="work-top"><span class="wtag">Redesign</span><span class="go">↗</span></div>
+        <div class="work-body"><h3>Redesigns</h3><p>We rebuild dated sites in 2 weeks and keep content and rankings.</p></div>
+      </article>
+      <article class="work-card" tabindex="0" data-sp="sp-seo" role="link" aria-label="Open SEO details">
+        <img class="bg" src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?q=80&w=1200&auto=format&fit=crop" alt="SEO" loading="lazy">
+        <div class="work-top"><span class="wtag">SEO</span><span class="go">↗</span></div>
+        <div class="work-body"><h3>SEO</h3><p>Technical fixes, Core Web Vitals, blogs and local listings.</p></div>
+      </article>
+      <article class="work-card" tabindex="0" data-sp="sp-care" role="link" aria-label="Open care plan details">
+        <img class="bg" src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&auto=format&fit=crop" alt="Care" loading="lazy">
+        <div class="work-top"><span class="wtag">Care</span><span class="go">↗</span></div>
+        <div class="work-body"><h3>Care plans</h3><p>Monthly updates, backups, and small builds. $29/mo.</p></div>
+      </article>
+    </div>
+
+    <div class="story" id="story">
+      <div class="story-media">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1400&auto=format&fit=crop" alt="Studio team" loading="lazy">
+        <span class="story-badge">■ how we ship</span>
+      </div>
+      <div class="story-copy" style="background:var(--dark);color:#fff;border-radius:0 16px 16px 0">
+        <div class="kicker" style="color:var(--concrete-light)">Studio OS</div>
+        <h2 class="sec" style="font-size:clamp(28px,4vw,44px)">How we ship. Live in days.</h2>
+        <p style="color:rgba(255,255,255,.8);max-width:56ch">One senior team, one build queue, daily previews. You see what is done and what is next.</p>
+        <div class="timeline">
+          <div class="tl"><b>DAY 01</b><p><strong>Kickoff + wireframe.</strong> Positioning, sitemap &amp; homepage draft in 24h.</p></div>
+          <div class="tl"><b>DAY 03</b><p><strong>Design lock.</strong> Full UI, copy polish, mobile-first.</p></div>
+          <div class="tl"><b>DAY 07</b><p><strong>Build + launch.</strong> SEO, analytics, speed pass, deploy &amp; handover video.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lane"></div>
+
+<section class="pad mid-sec" id="services">
+  <div class="wrap rv">
+    <div class="kicker">Services</div>
+    <h2 class="sec">Design, build, commerce, growth.</h2>
+    <p class="sec-sub">Four offers from the studio playbook — tap to expand.</p>
+    <div class="acc" id="acc">
+      <div class="acc-item open">
+        <button class="acc-btn" aria-expanded="true"><span class="num">01</span><h3>Design</h3><span class="plus">+</span></button>
+        <div class="acc-panel"><div class="acc-inner"><p>Interface design with clear hierarchy. Figma to live, pixel-matched, with motion that respects reduced-motion settings.</p><div class="pills"><span class="pill solid">UI / UX</span><span class="pill">Design systems</span><span class="pill">Prototypes</span><span class="pill">Brand kits</span></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false"><span class="num">02</span><h3>Build</h3><span class="plus">+</span></button>
+        <div class="acc-panel"><div class="acc-inner"><p>Hand-coded, semantic HTML/CSS/JS or Next.js. Accessible AA, analytics and a CMS you can edit without a developer.</p><div class="pills"><span class="pill">Next.js</span><span class="pill">Single-file builds</span><span class="pill">CMS</span><span class="pill">Hosting</span></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false"><span class="num">03</span><h3>Commerce</h3><span class="plus">+</span></button>
+        <div class="acc-panel"><div class="acc-inner"><p>Shopify, Stripe, bookings and lead funnels. Product pages, upsells, and abandoned-cart emails.</p><div class="pills"><span class="pill">Shopify</span><span class="pill">Stripe</span><span class="pill">Bookings</span><span class="pill">A/B tests</span></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false"><span class="num">04</span><h3>Growth</h3><span class="plus">+</span></button>
+        <div class="acc-panel"><div class="acc-inner"><p>SEO sprints, blog engines, local listings, monthly experiments. Plus care plans: updates, backups, uptime &amp; priority queue.</p><div class="pills"><span class="pill solid">SEO sprints</span><span class="pill">Content</span><span class="pill">Care plans</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lane"></div>
+
+<section class="pad mid-sec" id="pricing" style="background:var(--asphalt)">
+  <div class="wrap rv">
+    <div class="kicker">Pricing</div>
+    <h2 class="sec">One price.</h2>
+    <p class="sec-sub">No tiers. No quote calls. The number is below and it does not change.</p>
+    <div class="grid3" style="grid-template-columns:minmax(280px,640px);justify-content:center">
+      <div class="card featured">
+        <span class="wtag" style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);white-space:nowrap">■ One offer</span>
+        <div class="price-split" style="margin-top:10px">
+          <div>
+            <div class="price">$699<span> / one-time</span></div>
+            <p style="opacity:.75;font-size:15px">The full site. Design, build, copy polish, SEO basics, analytics. Live in 7–14 days.</p>
+            <div class="price" style="margin-top:18px;font-size:28px">+$29<span> / month</span></div>
+            <p style="opacity:.75;font-size:15px">Hosting, updates, backups, and small tweaks. Cancel anytime. You keep the site either way.</p>
+          </div>
+          <div>
+            <ul><li>Up to 6 pages + blog</li><li>Contact form, bookings, Stripe links</li><li>Copy polish and SEO basics</li><li>Handover video. Edit text yourself</li></ul>
+            <button class="btn-card qopen" type="button">Start · $699</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="reassure">Fixed quote before work starts · You own 100% of code and domain · 30-day fixes included</p>
+  </div>
+</section>
+
+<section class="manifesto rv">
+  <blockquote>“Clear beats clever. We cut until a stranger knows what to do in 5 seconds.”</blockquote>
+  <cite>— hwy.webs studio principle</cite>
+</section>
+
+<div class="lane"></div>
+
+<section class="pad dark-sec" id="contact">
+  <div class="wrap rv">
+    <div class="kicker">Contact</div>
+    <h2 class="sec">Start a project.</h2>
+    <p class="sec-sub">Tell us what you sell and what the site should do. We reply within 24 hours with a fixed quote and timeline.</p>
+    <div class="c-grid">
+      <form id="leadForm" novalidate>
+        <div class="form-row">
+          <div class="field"><label for="name">Your name</label><input id="name" name="name" placeholder="Jordan Smith" autocomplete="name" required></div>
+          <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="you@company.com" autocomplete="email" required></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="type">Project type</label><input id="type" placeholder="Startup site / store / redesign"></div>
+          <div class="field"><label for="budget">Budget</label><input id="budget" placeholder="$699 build, $29/mo care"></div>
+        </div>
+        <div class="field"><label for="msg">What do you need?</label><textarea id="msg" placeholder="What do you sell, and what should the site do? Link your current site if you have one."></textarea></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-solid" type="submit" style="flex:1;justify-content:center;min-width:220px">Send message ↗</button>
+          <button class="btn btn-ghost qopen" type="button">Quick start →</button>
+        </div>
+        <p id="formNote" style="margin-top:12px;font-size:14px;opacity:.8"></p>
+      </form>
+      <div style="display:grid;gap:12px;align-content:start">
+        <div class="info-card"><h3>■ Direct</h3><p><a href="mailto:highwaywebsites@gmail.com">highwaywebsites@gmail.com</a><br><a href="tel:+14796339035">479-633-9035</a><br><span style="opacity:.7;font-size:15px">Remote-first · worldwide</span><br><span style="font-size:13px;opacity:.7">avg reply: 6h · mon–fri</span></p><p style="margin-top:10px;font-size:14px;opacity:.8">Reply time: within 24h · Delivery: 7–14 days</p></div>
+        <div class="info-card"><h3>■ Prefer to pick a time?</h3><p style="font-size:15px;opacity:.8">Add “call” in your message with your timezone. We will send a 15-minute link.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span style="display:flex;align-items:center;gap:10px"><a class="flogo" href="#/dev" aria-label="Dev console"><img class="light" src="logo-icon.png" alt="HWY WEBS logo" /><img class="dark" src="logo-icon-dark.png" alt="" aria-hidden="true" /></a> © <span id="y"></span> HIGHWAY WEBSITES · SHARP BY DEFAULT</span>
+  <span class="flinks"><a href="#work">Work</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a><a href="#top">Top ↑</a></span>
+</footer>
+
+<!-- Subpages (content 1, highway modal style) -->
+<div class="subpage" id="sp-startups" role="dialog" aria-modal="true" inert>
+  <div class="sp-backdrop" data-close></div>
+  <div class="sp-sheet">
+    <div class="sp-hero"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop" alt=""><div class="sp-hero-top"><span class="wtag">Startups</span><button class="sp-back" data-close>← All work</button></div><div class="sp-hero-body"><h2>Launch</h2><p>One page that explains the offer, shows proof, and asks for contact. Live in 7 days.</p></div></div>
+    <div class="sp-body"><div class="kicker">Inside</div><h3 style="font-family:'Space Grotesk';font-size:22px;margin:8px 0">Positioning, design, and build in one sprint.</h3><p style="opacity:.8;margin-top:8px">Hero, proof, features, pricing, FAQ, footer plus waitlist or demo booking wired to your CRM.</p><ul class="sp-list"><li><b>Messaging</b>&nbsp;— headline a stranger understands in 5 seconds</li><li><b>Analytics</b>&nbsp;— PostHog or GA4 from day one</li><li><b>Handover video</b>&nbsp;— edit text yourself, no dev needed</li></ul><div class="sp-ctas"><button class="btn btn-solid" data-goto-contact>Start · $699 ↗</button></div><div class="sp-related"><a href="#/work/landing">Landing</a><a href="#/work/seo">SEO</a><a href="#work">All work</a></div></div>
+  </div>
+</div>
+<div class="subpage" id="sp-ecommerce" role="dialog" aria-modal="true" inert>
+  <div class="sp-backdrop" data-close></div>
+  <div class="sp-sheet">
+    <div class="sp-hero"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1600&auto=format&fit=crop" alt=""><div class="sp-hero-top"><span class="wtag">E-commerce</span><button class="sp-back" data-close>← All work</button></div><div class="sp-hero-body"><h2>Stores</h2><p>Shopify or headless. Fast product pages, clear carts.</p></div></div>
+    <div class="sp-body"><div class="kicker">Inside</div><h3 style="font-family:'Space Grotesk';font-size:22px;margin:8px 0">Fewer steps between product and paid.</h3><ul class="sp-list"><li><b>Fast product pages</b>&nbsp;— compressed images + lazy loading</li><li><b>Stripe / Shop Pay</b>&nbsp;— express checkout included</li><li><b>30 days of tweaks</b>&nbsp;— after launch included</li></ul><div class="sp-ctas"><button class="btn btn-solid" data-goto-contact>Scope my store ↗</button></div><div class="sp-related"><a href="#/work/startups">Startups</a><a href="#/work/care">Care</a><a href="#work">All work</a></div></div>
+  </div>
+</div>
+<div class="subpage" id="sp-landing" role="dialog" aria-modal="true" inert>
+  <div class="sp-backdrop" data-close></div>
+  <div class="sp-sheet">
+    <div class="sp-hero"><img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1600&auto=format&fit=crop" alt=""><div class="sp-hero-top"><span class="wtag">Landing</span><button class="sp-back" data-close>← All work</button></div><div class="sp-hero-body"><h2>Landing pages</h2><p>For ads, launches, and waitlists. One goal per page.</p></div></div>
+    <div class="sp-body"><div class="kicker">Inside</div><h3 style="font-family:'Space Grotesk';font-size:22px;margin:8px 0">Built to load fast for paid traffic.</h3><ul class="sp-list"><li><b>Light build</b>&nbsp;— no page-builder code</li><li><b>UTM + events</b>&nbsp;— see which ad brought the lead</li><li><b>48-hour rush</b>&nbsp;— available for launches</li></ul><div class="sp-ctas"><button class="btn btn-solid" data-goto-contact>Get a landing page ↗</button></div><div class="sp-related"><a href="#/work/redesign">Redesign</a><a href="#/work/startups">Startups</a><a href="#work">All work</a></div></div>
+  </div>
+</div>
+<div class="subpage" id="sp-redesign" role="dialog" aria-modal="true" inert>
+  <div class="sp-backdrop" data-close></div>
+  <div class="sp-sheet">
+    <div class="sp-hero"><img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=1600&auto=format&fit=crop" alt=""><div class="sp-hero-top"><span class="wtag">Redesign</span><button class="sp-back" data-close>← All work</button></div><div class="sp-hero-body"><h2>Redesigns</h2><p>Keep your authority. Lose the dated layout.</p></div></div>
+    <div class="sp-body"><div class="kicker">Inside</div><h3 style="font-family:'Space Grotesk';font-size:22px;margin:8px 0">Same content, clearer layout.</h3><ul class="sp-list"><li><b>SEO-safe migration</b>&nbsp;— URLs, meta, links kept</li><li><b>Before / after report</b>&nbsp;— vitals, clarity, CTA coverage</li><li><b>14-day turnaround</b>&nbsp;— typical</li></ul><div class="sp-ctas"><button class="btn btn-solid" data-goto-contact>Audit my site ↗</button></div><div class="sp-related"><a href="#/work/seo">SEO</a><a href="#/work/ecommerce">E-commerce</a><a href="#work">All work</a></div></div>
+  </div>
+</div>
+<div class="subpage" id="sp-seo" role="dialog" aria-modal="true" inert>
+  <div class="sp-backdrop" data-close></div>
+  <div class="sp-sheet">
+    <div class="sp-hero"><img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?q=80&w=1600&auto=format&fit=crop" alt=""><div class="sp-hero-top"><span class="wtag">SEO</span><button class="sp-back" data-close>← All work</button></div><div class="sp-hero-body"><h2>SEO</h2><p>Technical fixes + a content setup you can run.</p></div></div>
+    <div class="sp-body"><div class="kicker">Inside</div><h3 style="font-family:'Space Grotesk';font-size:22px;margin:8px 0">Fast pages rank better.</h3><ul class="sp-list"><li><b>Vitals target</b>&nbsp;— LCP under 2.5s, CLS under 0.1</li><li><b>Local SEO</b>&nbsp;— maps, reviews, citations</li><li><b>Content system</b>&nbsp;— markdown blog, no upkeep</li></ul><div class="sp-ctas"><button class="btn btn-solid" data-goto-contact>Run an SEO sprint ↗</button></div><div class="sp-related"><a href="#/work/care">Care</a><a href="#/work/landing">Landing</a><a href="#work">All work</a></div></div>
+  </div>
+</div>
+<div class="subpage" id="sp-care" role="dialog" aria-modal="true" inert>
+  <div class="sp-backdrop" data-close></div>
+  <div class="sp-sheet">
+    <div class="sp-hero"><img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1600&auto=format&fit=crop" alt=""><div class="sp-hero-top"><span class="wtag">Care</span><button class="sp-back" data-close>← All work</button></div><div class="sp-hero-body"><h2>Care plans</h2><p>From $29/mo. Updates, backups, small builds.</p></div></div>
+    <div class="sp-body"><div class="kicker">Inside</div><h3 style="font-family:'Space Grotesk';font-size:22px;margin:8px 0">Ongoing help without hiring.</h3><ul class="sp-list"><li><b>Fixes</b>&nbsp;— broken parts repaired same day</li><li><b>Monthly report</b>&nbsp;— traffic, speed, shipped</li><li><b>No lock-in</b>&nbsp;— pause or cancel anytime</li></ul><div class="sp-ctas"><button class="btn btn-solid" data-goto-contact>Get care · $29/mo ↗</button></div><div class="sp-related"><a href="#/work/startups">Startups</a><a href="#/work/redesign">Redesign</a><a href="#work">All work</a></div></div>
+  </div>
+</div>
+
+<!-- Dev console: login + spreadsheet dashboard (sites / leads / analytics) -->
+<div class="subpage" id="sp-dev" role="dialog" aria-modal="true" inert>
+  <div class="sp-backdrop" data-close></div>
+  <div class="sp-sheet">
+    <div class="sp-body">
+      <div class="dev-top"><button class="sp-back" data-close>← Site</button></div>
+      <div class="box" id="loginBox">
+        <div class="head">
+          <img src="logo-icon.png" alt="Hwy . Webs logo" />
+          <div class="t">DEV.<br/>Console</div>
+        </div>
+        <div id="loginView">
+          <form id="f">
+            <input id="dEmail" required type="email" placeholder="Email" autocomplete="username" />
+            <input id="dPw" required type="password" placeholder="Password" autocomplete="current-password" />
+            <button id="go" type="submit">Enter →</button>
+          </form>
+          <div id="err"></div>
+        </div>
+        <a class="back" href="#top" data-close>← Back to site</a>
+      </div>
+      <div id="dash">
+        <div class="dash-top">
+          <img src="logo-icon.png" alt="Hwy . Webs logo" />
+          <div><b>Dashboard</b><div class="who" id="who"></div></div>
+          <div class="sp"></div>
+          <button class="small ghost" id="out" type="button">Log out</button>
+          <a class="back" style="margin:0" href="#top" data-close>← Back to site</a>
+        </div>
+        <div class="tabs">
+          <button class="small active" id="tabSites" type="button">Sites</button>
+          <button class="small ghost" id="tabLeads" type="button">Leads</button>
+          <button class="small ghost" id="tabAnalytics" type="button">Analytics</button>
+        </div>
+        <div class="panel" id="sitesPanel">
+          <div class="panel-head">
+            <h2>All sites</h2>
+            <div class="sp"></div>
+            <button class="small ghost" id="addBtn" type="button">Add</button>
+          </div>
+          <div id="allList"><p class="muted">Loading…</p></div>
+          <div id="addWrap">
+            <form id="addF">
+              <div class="addgrid">
+                <input id="aName" required placeholder="Site name" />
+                <select id="aStatus"><option value="todo">Not started</option><option value="progress" selected>In progress</option><option value="done">Finished</option></select>
+              </div>
+              <div class="addgrid">
+                <input id="aUrl" placeholder="Link (https://…)" />
+                <input id="aFile" placeholder="HTML file (e.g. index.html)" />
+              </div>
+              <input id="aNotes" placeholder="Notes (optional)" />
+              <label class="checkrow"><input id="aContacted" type="checkbox" /> Contacted them</label>
+              <button type="submit">Review →</button>
+            </form>
+          </div>
+          <div id="confirmWrap">
+            <h3>Are you sure?</h3>
+            <div id="confirmSummary" class="muted"></div>
+            <div class="row">
+              <button type="button" id="confirmBack" class="ghost">Back</button>
+              <button type="button" id="confirmYes">Yes, add site</button>
+            </div>
+          </div>
+        </div>
+        <div class="panel" id="leadsPanel" style="display:none">
+          <div class="panel-head"><h2>Leads</h2></div>
+          <div id="leadsList"><p class="muted">Loading…</p></div>
+        </div>
+        <div class="panel" id="analyticsPanel" style="display:none">
+          <div class="panel-head"><h2>Analytics</h2></div>
+          <p class="muted">Coming soon</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quote wizard (design 2) -->
+<div class="overlay" id="qOverlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Start your website">
+    <button class="mclose" id="qClose" aria-label="Close">✕</button>
+    <div class="mdots"><span class="mdot on"></span><span class="mdot"></span><span class="mdot"></span></div>
+    <div class="mstep active" data-s="0">
+      <h3>Who are you?</h3>
+      <p class="msub">First step — how do we reach you.</p>
+      <div class="frow">
+        <div><label class="lbl" for="qFirst">First name</label><input id="qFirst" type="text" autocomplete="given-name" /></div>
+        <div><label class="lbl" for="qLast">Last name</label><input id="qLast" type="text" autocomplete="family-name" /></div>
+      </div>
+      <label class="lbl" for="qEmail">Email</label><input id="qEmail" type="email" autocomplete="email" />
+      <div class="orline">— or —</div>
+      <label class="lbl" for="qPhone">Phone</label><input id="qPhone" type="tel" autocomplete="tel" />
+      <p class="merr" id="e0"></p>
+      <div class="mrow"><button class="mnext" data-go="1" type="button">Continue →</button></div>
+    </div>
+    <div class="mstep" data-s="1">
+      <h3>What is this website's purpose?</h3>
+      <p class="msub">Tap all that apply.</p>
+      <div class="chips" id="qPurpose">
+        <button class="chip" type="button">Business website</button>
+        <button class="chip" type="button">Online store</button>
+        <button class="chip" type="button">Portfolio</button>
+        <button class="chip" type="button">Restaurant or cafe</button>
+        <button class="chip" type="button">Bookings</button>
+        <button class="chip" type="button">Blog</button>
+        <button class="chip" type="button">Landing page</button>
+        <button class="chip" type="button" data-other="1">Other</button>
+      </div>
+      <div id="qOtherWrap"><label class="lbl" for="qOther">Other — tell us</label><input id="qOther" type="text" placeholder="Describe it…" /></div>
+      <p class="merr" id="e1"></p>
+      <div class="mrow"><button class="mback" data-go="0" type="button">← Back</button><button class="mnext" data-go="2" type="button">Continue →</button></div>
+    </div>
+    <div class="mstep" data-s="2">
+      <h3>Where did you hear about us?</h3>
+      <p class="msub">(we wanna know)</p>
+      <div class="chips col" id="qSource">
+        <button class="chip" type="button">Google search</button>
+        <button class="chip" type="button">Instagram</button>
+        <button class="chip" type="button">Friend or family</button>
+        <button class="chip" type="button">Saw our work</button>
+      </div>
+      <p class="merr" id="e2"></p>
+      <div class="mrow"><button class="mback" data-go="1" type="button">← Back</button><button class="msubmit" id="qSubmit" type="button">Submit</button></div>
+    </div>
+    <div class="mstep" data-s="3">
+      <h3 id="sendTitle">Mailing your request…</h3>
+      <p class="msub" id="sendSub">Driving it down the highway.</p>
+      <div class="road" id="sendRoad"><div class="env"></div></div>
+      <button id="sendClose" type="button">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+// nav (design 2)
+const nav=document.getElementById('navbar'),holder=document.getElementById('topnav');
+let navLocked=false;
+addEventListener('scroll',()=>{
+  if(scrollY>60&&!navLocked){nav.classList.add('visible');navLocked=true;}
+  if(!navLocked)return;
+  if(scrollY<=10)holder.classList.add('docked');else holder.classList.remove('docked');
+},{passive:true});
+// video autoplay
+const video=document.getElementById('heroVideo'),vidCover=document.getElementById('vidCover'),scrollHint=document.getElementById('scrollHint');
+video.muted=true;video.defaultMuted=true;video.autoplay=true;video.loop=true;video.controls=false;
+video.setAttribute('muted','');video.setAttribute('autoplay','');video.setAttribute('playsinline','');video.removeAttribute('controls');
+function autoPlay(){if(!video.paused&&!video.ended)return;try{const p=video.play();if(p&&p.catch)p.catch(()=>{});}catch(e){}}
+video.addEventListener('play',()=>vidCover.classList.add('hidden'));
+video.addEventListener('pause',()=>vidCover.classList.remove('hidden'));
+video.load();video.addEventListener('canplay',autoPlay);video.addEventListener('loadeddata',autoPlay);
+document.addEventListener('DOMContentLoaded',autoPlay);addEventListener('load',autoPlay);
+['pointerdown','touchstart','scroll','wheel','keydown'].forEach(e=>addEventListener(e,autoPlay,{passive:true}));
+autoPlay();setTimeout(autoPlay,300);
+const retry=setInterval(()=>{if(!video.paused&&!video.ended)clearInterval(retry);else autoPlay();},1000);
+setTimeout(()=>clearInterval(retry),15000);
+addEventListener('scroll',()=>{scrollHint.classList.toggle('hidden',scrollY>40);},{passive:true});
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+// count-up
+const sg=document.querySelector('.stats-grid');let counted=false;
+if(sg&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  new IntersectionObserver((es,obs)=>{if(!es[0].isIntersecting||counted)return;counted=true;obs.disconnect();
+    sg.querySelectorAll('[data-count]').forEach(el=>{const t=parseFloat(el.dataset.count),pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';const t0=performance.now(),dur=700;(function tick(n){const p=Math.min(1,(n-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=pre+Math.round(t*e)+suf;if(p<1)requestAnimationFrame(tick);})(t0);});
+  },{threshold:.4}).observe(sg);
+}
+// accordion (content 1)
+const items=[...document.querySelectorAll('.acc-item')];
+function sizePanels(){items.forEach(it=>{const p=it.querySelector('.acc-panel');p.style.maxHeight=it.classList.contains('open')?p.scrollHeight+'px':'0px';});}
+items.forEach(it=>it.querySelector('.acc-btn').addEventListener('click',()=>{const was=it.classList.contains('open');items.forEach(x=>{x.classList.remove('open');x.querySelector('.acc-btn').setAttribute('aria-expanded','false');});if(!was){it.classList.add('open');it.querySelector('.acc-btn').setAttribute('aria-expanded','true');}sizePanels();}));
+addEventListener('resize',sizePanels);sizePanels();
+// subpages hash routing (content 1)
+const SPAGES={startups:'sp-startups',ecommerce:'sp-ecommerce',landing:'sp-landing',redesign:'sp-redesign',seo:'sp-seo',care:'sp-care'};
+const SLUGS=Object.fromEntries(Object.entries(SPAGES).map(([k,v])=>[v,k]));
+let lastFocus=null;
+function openSub(id){const sp=document.getElementById(id);if(!sp)return;lastFocus=document.activeElement;document.querySelectorAll('.subpage.open').forEach(x=>{x.classList.remove('open');x.setAttribute('inert','');});sp.classList.add('open');sp.removeAttribute('inert');document.body.style.overflow='hidden';sp.querySelector('.sp-sheet').scrollTop=0;}
+function closeSub(push){document.querySelectorAll('.subpage.open').forEach(x=>{x.classList.remove('open');x.setAttribute('inert','');});if(!document.querySelector('.overlay.open'))document.body.style.overflow='';if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});if(push!==false){const h=location.hash;if(h.startsWith('#/work/'))history.pushState(null,'','#work');else if(h==='#/dev')history.pushState(null,'','#top');}}
+function routeSub(){const m=location.hash.match(/^#\/work\/([\w-]+)/);if(m&&SPAGES[m[1]])openSub(SPAGES[m[1]]);else if(location.hash==='#/dev'){openSub('sp-dev');if(window.__devOpen)window.__devOpen();}else{document.querySelectorAll('.subpage.open').forEach(x=>{x.classList.remove('open');x.setAttribute('inert','');});if(!document.querySelector('.overlay.open'))document.body.style.overflow='';}}
+document.querySelectorAll('.work-card[data-sp]').forEach(c=>{c.addEventListener('click',()=>{const s=SLUGS[c.dataset.sp];if(s)location.hash='#/work/'+s;});c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();const s=SLUGS[c.dataset.sp];if(s)location.hash='#/work/'+s;}});});
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeSub()));
+document.querySelectorAll('[data-goto-contact]').forEach(b=>b.addEventListener('click',()=>{closeSub(false);location.hash='#contact';document.getElementById('contact').scrollIntoView({behavior:'smooth'});}));
+addEventListener('hashchange',routeSub);routeSub();
+addEventListener('keydown',e=>{if(e.key==='Escape'&&document.querySelector('.subpage.open'))closeSub();});
+// lead form (content 1 mailto)
+document.getElementById('leadForm').addEventListener('submit',e=>{e.preventDefault();const n=document.getElementById('name').value.trim(),em=document.getElementById('email').value.trim();const note=document.getElementById('formNote');if(!n||!em||!em.includes('@')){note.textContent='Please add your name + valid email so we can reply.';note.style.color='#ffb3b3';return;}const subject=encodeURIComponent('HWY WEBS inquiry from '+n);const body=encodeURIComponent('Name: '+n+'\nEmail: '+em+'\nType: '+document.getElementById('type').value+'\nBudget: '+document.getElementById('budget').value+'\n\n'+document.getElementById('msg').value);note.textContent='Thanks '+n.split(' ')[0]+' — opening your email to send it our way…';note.style.color='#fff';setTimeout(()=>{location.href='mailto:highwaywebsites@gmail.com?subject='+subject+'&body='+body;},600);});
+// quote wizard (design 2 + supabase)
+const overlay=document.getElementById('qOverlay'),modalBox=overlay.querySelector('.modal');
+function shakeForm(){modalBox.classList.remove('shake');void modalBox.offsetWidth;modalBox.classList.add('shake');setTimeout(()=>modalBox.classList.remove('shake'),500);}
+const msteps=[...document.querySelectorAll('.mstep')],mdots=[...document.querySelectorAll('.mdot')];let qi=0;
+function goQ(i){qi=i;msteps.forEach((s,k)=>s.classList.toggle('active',k===i));mdots.forEach((d,k)=>d.classList.toggle('on',k<=Math.min(i,2)));}
+function openQ(){overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');goQ(0);document.body.style.overflow='hidden';}
+function closeQ(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');if(!document.querySelector('.subpage.open'))document.body.style.overflow='';}
+document.querySelectorAll('.qopen').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openQ();}));
+document.getElementById('qClose').addEventListener('click',closeQ);
+document.getElementById('sendClose').addEventListener('click',closeQ);
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeQ();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))closeQ();});
+const purposeBox=document.getElementById('qPurpose');
+purposeBox.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{c.classList.toggle('on');document.getElementById('qOtherWrap').style.display=purposeBox.querySelector('[data-other]').classList.contains('on')?'block':'none';}));
+const sourceBox=document.getElementById('qSource');
+sourceBox.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{sourceBox.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');}));
+function validStep(i){
+  if(i===0){const f=document.getElementById('qFirst').value.trim(),l=document.getElementById('qLast').value.trim(),em=document.getElementById('qEmail').value.trim(),ph=document.getElementById('qPhone').value.trim();
+    if(!f||!l){document.getElementById('e0').textContent='First and last name, please.';shakeForm();return false;}
+    if(!em&&!ph){document.getElementById('e0').textContent='Email or phone — we need one way to reach you.';shakeForm();return false;}
+    if(em&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){document.getElementById('e0').textContent='That email looks off.';shakeForm();return false;}
+    document.getElementById('e0').textContent='';return true;}
+  if(i===1){const picked=purposeBox.querySelectorAll('.chip.on').length,otherOn=purposeBox.querySelector('[data-other]').classList.contains('on'),otherTx=document.getElementById('qOther').value.trim();
+    if(!picked){document.getElementById('e1').textContent='Pick at least one purpose.';shakeForm();return false;}
+    if(otherOn&&!otherTx){document.getElementById('e1').textContent='Tell us what Other means.';shakeForm();return false;}
+    document.getElementById('e1').textContent='';return true;}
+  return true;
+}
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{const to=parseInt(b.dataset.go,10);if(to>qi&&!validStep(qi))return;goQ(to);}));
+const SB_URL="https://fumxcvfvvymcgtdgaonq.supabase.co";
+const SB_KEY="sb_publishable_QGolgdDRloafuOCzj8oG5g_j28nmI9v";
+let sbClient=null;
+function ensureSupa(){return new Promise((res,rej)=>{if(window.supabase&&sbClient)return res(sbClient);if(window.supabase){sbClient=window.supabase.createClient(SB_URL,SB_KEY);return res(sbClient);}const s=document.createElement('script');s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";s.onload=()=>{try{sbClient=window.supabase.createClient(SB_URL,SB_KEY);res(sbClient);}catch(e){rej(e);}};s.onerror=rej;document.head.appendChild(s);});}
+document.getElementById('qSubmit').addEventListener('click',async ()=>{
+  if(!sourceBox.querySelector('.chip.on')){document.getElementById('e2').textContent='Pick one so we know.';shakeForm();return;}
+  document.getElementById('e2').textContent='';
+  const payload={first_name:document.getElementById('qFirst').value.trim(),last_name:document.getElementById('qLast').value.trim(),email:document.getElementById('qEmail').value.trim()||null,phone:document.getElementById('qPhone').value.trim()||null,purpose:[...purposeBox.querySelectorAll('.chip.on')].map(c=>c.textContent.trim()).join(', '),purpose_other:document.getElementById('qOther').value.trim()||null,source:sourceBox.querySelector('.chip.on').textContent.trim()};
+  goQ(3);document.getElementById('sendTitle').textContent='Mailing your request…';document.getElementById('sendSub').textContent='Driving it down the highway.';document.getElementById('sendRoad').style.display='block';document.getElementById('sendClose').style.display='none';
+  try{const sb=await ensureSupa();const {error}=await sb.from('leads').insert(payload);if(error)throw error;document.getElementById('sendTitle').textContent='Request received!';document.getElementById('sendSub').textContent="We'll reply within 48 hours.";}
+  catch(e){document.getElementById('sendTitle').textContent="Hmm, that didn't send";document.getElementById('sendSub').textContent='Check your connection and try again.';}
+  document.getElementById('sendRoad').style.display='none';document.getElementById('sendClose').style.display='block';
+});
+// dev console: login (no persistence) + spreadsheet dashboard (sites / leads / analytics)
+let devSupa=null;
+function ensureDevSupa(){return new Promise((res,rej)=>{if(window.supabase&&devSupa)return res(devSupa);if(window.supabase){try{devSupa=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:false,autoRefreshToken:false}});return res(devSupa);}catch(e){return rej(e);}}const s=document.createElement('script');s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";s.onload=()=>{try{devSupa=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:false,autoRefreshToken:false}});res(devSupa);}catch(e){rej(e);}};s.onerror=rej;document.head.appendChild(s);});}
+const DSTATUS_LABEL={todo:'Not started',progress:'In progress',done:'Finished'};
+function devEsc(x){return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function devFmt(d){try{return new Date(d).toLocaleString();}catch(e){return d||'—';}}
+function devRow(s){
+  const contacted=!!s.contacted;
+  return '<tr><td><b>'+devEsc(s.name)+'</b><div class="muted">'+devEsc(s.notes||'')+'</div></td>'
+    +'<td>'+devEsc(DSTATUS_LABEL[s.status]||s.status)+'</td>'
+    +'<td>'+(s.url?'<a href="'+devEsc(s.url)+'" target="_blank" rel="noopener">Open ↗</a>':'<span class="muted">—</span>')+'</td>'
+    +'<td>'+devEsc(s.html_file||'—')+'</td>'
+    +'<td><button class="contactbtn" onclick="devFlipContacted('+s.id+','+(!contacted)+')"><span class="dot '+(contacted?'green':'red')+'"></span>'+(contacted?'Contacted':'Not contacted')+'</button></td>'
+    +'<td class="muted">'+devFmt(s.updated_at)+'</td>'
+    +'<td><div class="rowbtns"><select class="small" onchange="devSetStatus('+s.id+',this.value)" style="border-radius:999px;padding:8px 10px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff">'
+    +'<option value="todo"'+(s.status==='todo'?' selected':'')+'>Not started</option>'
+    +'<option value="progress"'+(s.status==='progress'?' selected':'')+'>In progress</option>'
+    +'<option value="done"'+(s.status==='done'?' selected':'')+'>Finished</option></select></div></td></tr>';
+}
+function devTable(list){
+  if(!list.length)return '<p class="muted">Nothing here yet.</p>';
+  return '<table><tr><th>Site</th><th>Status</th><th>Link</th><th>HTML file</th><th>Contact</th><th>Last change</th><th></th></tr>'+list.map(devRow).join('')+'</table>';
+}
+async function devLoadSites(){
+  const listEl=document.getElementById('allList');
+  const slowNote=setTimeout(()=>{listEl.innerHTML='<p class="muted">Waking database… (free tier sleeps when idle, first load can take ~10s)</p>';},2500);
+  try{
+    const sb=await ensureDevSupa();
+    const {data,error}=await sb.from('sites').select('id,name,status,url,html_file,notes,contacted,updated_at').order('updated_at',{ascending:false});
+    clearTimeout(slowNote);
+    if(error)throw error;
+    listEl.innerHTML=devTable(data);
+  }catch(e){clearTimeout(slowNote);listEl.innerHTML='<p class="muted">Could not load sites — '+devEsc(e.message||e)+'</p>';}
+}
+async function devSetStatus(id,status){
+  try{const sb=await ensureDevSupa();await sb.from('sites').update({status}).eq('id',id);}catch(e){}
+  devLoadSites();
+}
+async function devFlipContacted(id,contacted){
+  try{const sb=await ensureDevSupa();await sb.from('sites').update({contacted}).eq('id',id);}catch(e){}
+  devLoadSites();
+}
+async function devLoadLeads(){
+  const listEl=document.getElementById('leadsList');
+  try{
+    const sb=await ensureDevSupa();
+    const {data,error}=await sb.from('leads').select('id,first_name,last_name,email,phone,purpose,purpose_other,source,created_at').order('created_at',{ascending:false});
+    if(error)throw error;
+    document.getElementById('tabLeads').textContent='Leads ('+data.length+')';
+    if(!data.length){listEl.innerHTML='<div class="empty"><svg width="54" height="54" viewBox="0 0 54 54" fill="none"><path d="M34 33A15 15 0 1 1 21 9a12 12 0 1 0 13 24z" fill="currentColor" opacity=".55"/><text x="36" y="20" font-size="13" font-weight="700" fill="currentColor">Z</text><text x="43" y="11" font-size="9" font-weight="700" fill="currentColor" opacity=".6">Z</text></svg><p class="muted">No requests yet…</p></div>';return;}
+    listEl.innerHTML='<table><tr><th>Name</th><th>Contact</th><th>Purpose</th><th>Heard via</th><th>Received</th></tr>'
+      +data.map(l=>'<tr><td><b>'+devEsc(l.first_name+' '+l.last_name)+'</b></td>'
+      +'<td>'+devEsc(l.email||'—')+'<div class="muted">'+devEsc(l.phone||'')+'</div></td>'
+      +'<td>'+devEsc(l.purpose||'—')+(l.purpose_other?'<div class="muted">'+devEsc(l.purpose_other)+'</div>':'')+'</td>'
+      +'<td>'+devEsc(l.source||'—')+'</td>'
+      +'<td class="muted">'+devFmt(l.created_at)+'</td></tr>').join('')+'</table>';
+  }catch(e){listEl.innerHTML='<p class="muted">Could not load leads — '+devEsc(e.message||e)+'</p>';}
+}
+function devShowTab(which){
+  const tabs={sites:['tabSites','sitesPanel'],leads:['tabLeads','leadsPanel'],analytics:['tabAnalytics','analyticsPanel']};
+  Object.keys(tabs).forEach(k=>{
+    const on=k===which;
+    document.getElementById(tabs[k][0]).classList.toggle('active',on);
+    document.getElementById(tabs[k][0]).classList.toggle('ghost',!on);
+    document.getElementById(tabs[k][1]).style.display=on?'block':'none';
+  });
+  if(which==='leads')devLoadLeads();
+}
+let devPending=null;
+async function devRefresh(){
+  try{Object.keys(localStorage).forEach(k=>{if(k.indexOf('sb-')===0)localStorage.removeItem(k);});}catch(e){}
+  const loginBox=document.getElementById('loginBox'),dash=document.getElementById('dash');
+  try{
+    const sb=await ensureDevSupa();
+    const {data}=await sb.auth.getSession();
+    const user=data.session&&data.session.user;
+    if(user){
+      document.getElementById('who').textContent=user.email;
+      loginBox.style.display='none';dash.style.display='block';
+      devLoadSites();return;
+    }
+  }catch(e){}
+  loginBox.style.display='block';dash.style.display='none';
+}
+window.__devOpen=()=>{devRefresh();};
+if(location.hash==='#/dev')window.__devOpen();
+document.getElementById('tabSites').onclick=()=>devShowTab('sites');
+document.getElementById('tabLeads').onclick=()=>devShowTab('leads');
+document.getElementById('tabAnalytics').onclick=()=>devShowTab('analytics');
+document.getElementById('f').onsubmit=async e=>{
+  e.preventDefault();
+  const errEl=document.getElementById('err'),goBtn=document.getElementById('go');
+  errEl.textContent='';goBtn.disabled=true;
+  try{
+    const sb=await ensureDevSupa();
+    const {error}=await sb.auth.signInWithPassword({email:document.getElementById('dEmail').value.trim(),password:document.getElementById('dPw').value});
+    if(error)throw error;
+    devRefresh();
+  }catch(e){errEl.textContent=e.message||e;}
+  goBtn.disabled=false;
+};
+document.getElementById('out').onclick=async()=>{try{const sb=await ensureDevSupa();await sb.auth.signOut();}catch(e){}devRefresh();};
+document.getElementById('addBtn').onclick=()=>{
+  const w=document.getElementById('addWrap'),c=document.getElementById('confirmWrap'),b=document.getElementById('addBtn');
+  const open=w.style.display==='block';
+  w.style.display=open?'none':'block';c.style.display='none';b.textContent=open?'Add':'Close';
+};
+document.getElementById('confirmBack').onclick=()=>{
+  document.getElementById('confirmWrap').style.display='none';
+  document.getElementById('addWrap').style.display='block';
+};
+document.getElementById('addF').onsubmit=e=>{
+  e.preventDefault();
+  devPending={
+    name:document.getElementById('aName').value.trim(),
+    status:document.getElementById('aStatus').value,
+    url:document.getElementById('aUrl').value.trim()||null,
+    html_file:document.getElementById('aFile').value.trim()||null,
+    notes:document.getElementById('aNotes').value.trim()||null,
+    contacted:document.getElementById('aContacted').checked
+  };
+  document.getElementById('confirmSummary').innerHTML='<b style="color:#fff">'+devEsc(devPending.name)+'</b> — '+devEsc(DSTATUS_LABEL[devPending.status])
+    +'<br/>Link: '+devEsc(devPending.url||'—')+' · File: '+devEsc(devPending.html_file||'—')+' · Contacted: '+(devPending.contacted?'Yes':'No');
+  document.getElementById('addWrap').style.display='none';
+  document.getElementById('confirmWrap').style.display='block';
+};
+document.getElementById('confirmYes').onclick=async()=>{
+  if(!devPending)return;
+  try{
+    const sb=await ensureDevSupa();
+    const {error}=await sb.from('sites').insert(devPending);
+    if(error)throw error;
+    devPending=null;
+    document.getElementById('addF').reset();
+    document.getElementById('confirmWrap').style.display='none';
+    document.getElementById('addBtn').textContent='Add';
+    devLoadSites();
+  }catch(e){alert(e.message||e);}
+};
+</script>
+</body>
+</html>
